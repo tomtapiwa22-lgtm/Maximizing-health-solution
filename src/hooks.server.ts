@@ -1,22 +1,26 @@
 import type { Handle } from '@sveltejs/kit';
-import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
+import { supabase } from '$lib/supabase';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  event.locals.supabase = createSupabaseServerClient({
-    supabaseUrl: PUBLIC_SUPABASE_URL,
-    supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
-    event
-  });
+  // Get session from cookie
+  const cookie = event.request.headers.get('cookie') || '';
+  const { data: { session } } = await supabase.auth.getSessionFromCookie(cookie);
 
-  event.locals.getSession = async () => {
-    const { data: { session } } = await event.locals.supabase.auth.getSession();
-    return session;
-  };
+  // Make user available in locals
+  event.locals.session = session;
+  event.locals.user = session?.user || null;
 
-  return resolve(event, {
-    filterSerializedResponseHeaders(name) {
-      return name === 'content-range';
-    }
-  });
+  // Load profile if logged in
+  if (session?.user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('full_name, role')
+      .eq('id', session.user.id)
+      .single();
+    event.locals.profile = profile;
+  } else {
+    event.locals.profile = null;
+  }
+
+  return resolve(event);
 };
