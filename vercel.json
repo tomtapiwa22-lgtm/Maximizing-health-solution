@@ -1,5 +1,11 @@
 {
   "build": {
-    "nodeVersion": "20"
-  }
+    "command": "npm run build"
+  },
+  "installCommand": "npm install",
+  "framework": null,
+  "nodeVersion": "20.x",
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
 }
