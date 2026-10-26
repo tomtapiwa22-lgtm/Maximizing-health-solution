@@ -1,12 +1,20 @@
-<script lang="ts">
-	import favicon from '#lib/assets/favicon.svg';
-	import type { LayoutProps } from './$types';
+import type { LayoutServerLoad } from './$types';
+import { supabase } from '$lib/supabase';
 
-	let { children }: LayoutProps = $props();
-</script>
+export const load: LayoutServerLoad = async ({ request }) => {
+  const cookie = request.headers.get('cookie') || '';
+  const { data: { session } } = await supabase.auth.getSessionFromCookie(cookie);
 
-<svelte:head>
-	<link rel="icon" href={favicon} />
-</svelte:head>
+  if (!session) return { user: null, profile: null };
 
-{@render children()}
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('full_name, role')
+    .eq('id', session.user.id)
+    .single();
+
+  return {
+    user: session.user,
+    profile: profile || null
+  };
+};
