@@ -1,8 +1,6 @@
 {
-  "nodeVersion": "20.x",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".svelte-kit/output/client",
   "framework": "sveltekit",
-  "build": {
-    "command": "npm run build",
-    "outputDirectory": ".svelte-kit/output"
-  }
+  "installCommand": "npm install"
 }
