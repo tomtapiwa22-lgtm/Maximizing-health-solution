@@ -7,20 +7,13 @@ export async function handle({ event, resolve }) {
     PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        get(name) {
-          return event.cookies.get(name);
-        },
-        set(name, value, options) {
-          event.cookies.set(name, value, { ...options, path: '/' });
-        },
-        remove(name, options) {
-          event.cookies.delete(name, { ...options, path: '/' });
-        }
+        get(name) { return event.cookies.get(name); },
+        set(name, value, options) { event.cookies.set(name, value, { ...options, path: '/' }); },
+        remove(name, options) { event.cookies.delete(name, { ...options, path: '/' }); }
       }
     }
   );
 
-  // ✅ Correct way to get session — NO getSessionFromCookie!
   const { data: { session } } = await supabase.auth.getSession();
 
   event.locals.supabase = supabase;
