@@ -7,7 +7,8 @@
   import { supabase } from '$lib/supabase';
   import { goto } from '$app/navigation';
 
-  export let data;
+  // Runes-compatible prop receipt
+  const data = $props();
   const { profile } = data;
 
   let clientsCount = 0;
@@ -45,7 +46,7 @@
   loadData();
 
   function formatDate(isoStr) {
-    return new Date(isoStr).toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+    return new Date(isoStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   }
 </script>
 
@@ -131,6 +132,40 @@
           <a href="#" class="action-btn">Send System Announcement</a>
         </div>
       </div>
+
+      <div class="card full-width">
+        <h3>Upcoming Reviews & Deadlines</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Assigned To</th>
+              <th>Due Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Quarterly compliance audit</td>
+              <td>Admin — You</td>
+              <td>05 Nov 2026</td>
+              <td><span class="status-tag pending">In Progress</span></td>
+            </tr>
+            <tr>
+              <td>David K. — Care plan review</td>
+              <td>Emma (Carer)</td>
+              <td>29 Oct 2026</td>
+              <td><span class="status-tag scheduled">Scheduled</span></td>
+            </tr>
+            <tr>
+              <td>Annual policy update</td>
+              <td>Admin — You</td>
+              <td>15 Nov 2026</td>
+              <td><span class="status-tag upcoming">Not Started</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
     {/if}
   </main>
@@ -142,6 +177,7 @@
     --primary-soft: #ccfbf1;
     --accent: #f43f5e;
     --success: #10b981;
+    --warning: #f59e0b;
     --neutral: #6366f1;
     --dark: #0f172a;
     --mid: #475569;
@@ -187,12 +223,14 @@
   .metric-change { font-size: 0.85rem; font-weight: 600; }
   .metric-change.positive { color: var(--success); }
   .metric-change.neutral { color: var(--neutral); }
+  .metric-change.warning { color: var(--warning); }
 
   .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
   .card {
     background: white; padding: 2rem; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.04);
   }
   .card.highlight { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border-left: 4px solid var(--primary); }
+  .card.full-width { grid-column: 1 / -1; }
   .card h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 1rem; }
 
   .activity-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
@@ -206,6 +244,14 @@
   .action-btn:hover { background: var(--primary); color: white; }
   .action-btn.primary { background: var(--primary); color: white; }
   .action-btn.primary:hover { background: #0d9488; }
+
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+  .data-table th, .data-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+  .data-table th { font-weight: 600; color: var(--dark); background: #f8fafc; }
+  .status-tag { padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+  .status-tag.pending { background: #fef3c7; color: #92400e; }
+  .status-tag.scheduled { background: #d1fae5; color: #065f46; }
+  .status-tag.upcoming { background: #e0e7ff; color: #3730a3; }
 
   @media (max-width: 768px) {
     .sidebar { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; flex-direction: row; padding: 0.8rem 1rem; border-right: none; border-top: 1px solid #e2e8f0; }
