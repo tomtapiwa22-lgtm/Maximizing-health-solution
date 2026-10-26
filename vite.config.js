@@ -7,10 +7,8 @@ export default defineConfig({
   plugins: [
     sveltekit({
       adapter: adapter(),
-      kit: {
-        alias: {
-          '$lib': fileURLToPath(new URL('./src/lib', import.meta.url))
-        }
+      alias: {
+        '$lib': fileURLToPath(new URL('./src/lib', import.meta.url))
       }
     })
   ]
