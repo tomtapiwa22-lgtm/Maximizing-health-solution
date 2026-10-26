@@ -3,6 +3,52 @@
   <meta name="description" content="System overview, management, and reporting" />
 </svelte:head>
 
+<script lang="ts">
+  import { supabase } from '$lib/supabase';
+  import { goto } from '$app/navigation';
+
+  export let data;
+  const { profile } = data;
+
+  let clientsCount = 0;
+  let carersCount = 0;
+  let appointments = [];
+  let loading = true;
+
+  async function loadData() {
+    const { count: cCount } = await supabase
+      .from('clients')
+      .select('*', { count: 'exact', head: true });
+    clientsCount = cCount || 0;
+
+    const { count: rCount } = await supabase
+      .from('profiles')
+      .select('*', { count: 'exact', head: true })
+      .eq('role', 'carer');
+    carersCount = rCount || 0;
+
+    const { data: apts } = await supabase
+      .from('appointments')
+      .select('*, client:client_id(profile:profile_id(full_name)), carer:carer_id(full_name)')
+      .order('scheduled_at', { ascending: true })
+      .limit(5);
+    appointments = apts || [];
+
+    loading = false;
+  }
+
+  async function signOut() {
+    await supabase.auth.signOut();
+    await goto('/');
+  }
+
+  loadData();
+
+  function formatDate(isoStr) {
+    return new Date(isoStr).toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+  }
+</script>
+
 <div class="dashboard-layout">
   <aside class="sidebar">
     <div class="sidebar-brand">
@@ -15,7 +61,7 @@
       <a href="#">All Care Plans</a>
       <a href="#">Reports & Compliance</a>
       <a href="#">System Settings</a>
-      <a href="/" class="nav-logout">← Sign Out</a>
+      <button on:click={signOut} class="nav-logout">← Sign Out</button>
     </nav>
   </aside>
 
@@ -23,72 +69,57 @@
     <header class="dashboard-header">
       <div>
         <h1>Administration Overview</h1>
-        <p>System health and activity at a glance</p>
+        <p>Welcome back, {profile?.full_name || 'Admin'}</p>
       </div>
       <div class="header-status">
         <span class="status-badge system-ok">System Online</span>
       </div>
     </header>
 
-    <!-- Key Metrics -->
+    {#if loading}
+      <p class="loading">Loading system data...</p>
+    {/if}
+
+    {#if !loading}
     <section class="metrics-row">
       <div class="metric-card">
         <div class="metric-label">Active Clients</div>
-        <div class="metric-value">42</div>
-        <div class="metric-change positive">+3 this week</div>
+        <div class="metric-value">{clientsCount}</div>
+        <div class="metric-change positive">All plans active</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">Active Carers</div>
-        <div class="metric-value">12</div>
-        <div class="metric-change neutral">All scheduled</div>
+        <div class="metric-value">{carersCount}</div>
+        <div class="metric-change neutral">All accounts verified</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Care Plans Active</div>
-        <div class="metric-value">42 / 42</div>
-        <div class="metric-change positive">100% compliant</div>
+        <div class="metric-label">Appointments</div>
+        <div class="metric-value">{appointments.length}</div>
+        <div class="metric-change positive">Upcoming scheduled</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Open Reports</div>
-        <div class="metric-value">1</div>
-        <div class="metric-change warning">Needs attention</div>
+        <div class="metric-label">System Status</div>
+        <div class="metric-value">Good</div>
+        <div class="metric-change positive">100% operational</div>
       </div>
     </section>
 
     <section class="dashboard-grid">
       <div class="card highlight">
-        <h3>Recent Activity</h3>
-        <ul class="activity-list">
-          <li><span class="time">10:42</span> — New client account created: Sarah M.</li>
-          <li><span class="time">09:15</span> — Compliance report generated — Oct 2026</li>
-          <li><span class="time">Yesterday</span> — Fall prevention guideline updated system-wide</li>
-          <li><span class="time">2 days ago</span> — Concern logged — Priya N. — in review</li>
-        </ul>
-        <a href="#" class="card-link">View full activity log →</a>
-      </div>
-
-      <div class="card">
-        <h3>Staff Availability</h3>
-        <ul class="status-list">
-          <li><span class="dot online"></span> 8 carers on shift now</li>
-          <li><span class="dot away"></span> 2 carers on leave</li>
-          <li><span class="dot offline"></span> 2 carers not scheduled</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Compliance Status</h3>
-        <div class="compliance-bar">
-          <div class="label">Documentation up to date</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 96%">96%</div></div>
-        </div>
-        <div class="compliance-bar">
-          <div class="label">Risk assessments complete</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 91%">91%</div></div>
-        </div>
-        <div class="compliance-bar">
-          <div class="label">Training records current</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 100%">100%</div></div>
-        </div>
+        <h3>Upcoming Appointments</h3>
+        {#if appointments.length > 0}
+          <ul class="activity-list">
+            {#each appointments as apt}
+              <li>
+                <span class="time">{formatDate(apt.scheduled_at)}</span>
+                {apt.client?.profile?.full_name} — {apt.title}
+                <span class="carer-name">({apt.carer?.full_name})</span>
+              </li>
+            {/each}
+          </ul>
+        {:else}
+          <p class="card-note">No appointments scheduled</p>
+        {/if}
       </div>
 
       <div class="card">
@@ -100,41 +131,8 @@
           <a href="#" class="action-btn">Send System Announcement</a>
         </div>
       </div>
-
-      <div class="card full-width">
-        <h3>Upcoming Reviews & Deadlines</h3>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Assigned To</th>
-              <th>Due Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Quarterly compliance audit</td>
-              <td>Admin — You</td>
-              <td>05 Nov 2026</td>
-              <td><span class="status-tag pending">In Progress</span></td>
-            </tr>
-            <tr>
-              <td>David K. — Care plan review</td>
-              <td>Emma (Carer)</td>
-              <td>29 Oct 2026</td>
-              <td><span class="status-tag scheduled">Scheduled</span></td>
-            </tr>
-            <tr>
-              <td>Annual policy update</td>
-              <td>Admin — You</td>
-              <td>15 Nov 2026</td>
-              <td><span class="status-tag upcoming">Not Started</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </section>
+    {/if}
   </main>
 </div>
 
@@ -144,7 +142,6 @@
     --primary-soft: #ccfbf1;
     --accent: #f43f5e;
     --success: #10b981;
-    --warning: #f59e0b;
     --neutral: #6366f1;
     --dark: #0f172a;
     --mid: #475569;
@@ -162,11 +159,12 @@
   .sidebar-brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; color: var(--primary); font-size: 1.1rem; }
   .logo-icon { font-size: 1.4rem; }
   .sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-nav a {
-    padding: 0.9rem 1rem; border-radius: 10px; text-decoration: none; color: var(--mid); font-weight: 500;
-    transition: all 0.25s;
+  .sidebar-nav a, .sidebar-nav button {
+    padding: 0.9rem 1rem; border-radius: 10px; text-decoration: none;
+    color: var(--mid); font-weight: 500; transition: all 0.25s;
+    text-align: left; width: 100%; border: none; background: none; font-size: 1rem; cursor: pointer;
   }
-  .sidebar-nav a:hover { background: var(--primary-soft); color: var(--primary); }
+  .sidebar-nav a:hover, .sidebar-nav button:hover { background: var(--primary-soft); color: var(--primary); }
   .sidebar-nav a.active { background: var(--primary); color: white; font-weight: 600; }
   .nav-logout { margin-top: 2rem; color: var(--accent) !important; }
 
@@ -174,8 +172,8 @@
   .dashboard-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
   .dashboard-header h1 { font-size: 1.8rem; color: var(--dark); margin-bottom: 0.3rem; }
   .dashboard-header p { color: var(--mid); }
-  .status-badge { padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
-  .status-badge.system-ok { background: #d1fae5; color: #065f46; }
+  .status-badge { padding: 0.5rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; background: #d1fae5; color: #065f46; }
+  .loading { text-align: center; padding: 3rem; color: var(--mid); }
 
   .metrics-row {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem;
@@ -189,12 +187,31 @@
   .metric-change { font-size: 0.85rem; font-weight: 600; }
   .metric-change.positive { color: var(--success); }
   .metric-change.neutral { color: var(--neutral); }
-  .metric-change.warning { color: var(--warning); }
 
   .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
   .card {
     background: white; padding: 2rem; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.04);
   }
   .card.highlight { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border-left: 4px solid var(--primary); }
-  .card.full-width { grid-column: 1 / -1; }
-  .card h3 { font-size: 1.1rem; color:
+  .card h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 1rem; }
+
+  .activity-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .activity-list li { font-size: 0.9rem; color: var(--mid); line-height: 1.5; }
+  .activity-list .time { font-weight: 600; color: var(--primary); margin-right: 0.5rem; }
+  .carer-name { color: var(--mid); font-size: 0.85rem; }
+
+  .action-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .action-buttons.stacked { flex-direction: column; }
+  .action-btn { padding: 0.8rem 1.5rem; background: var(--primary-soft); color: var(--primary); border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.25s; text-align: center; }
+  .action-btn:hover { background: var(--primary); color: white; }
+  .action-btn.primary { background: var(--primary); color: white; }
+  .action-btn.primary:hover { background: #0d9488; }
+
+  @media (max-width: 768px) {
+    .sidebar { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; flex-direction: row; padding: 0.8rem 1rem; border-right: none; border-top: 1px solid #e2e8f0; }
+    .sidebar-brand { display: none; }
+    .sidebar-nav { flex-direction: row; gap: 0.3rem; }
+    .sidebar-nav a, .sidebar-nav button { padding: 0.6rem 0.8rem; font-size: 0.85rem; }
+    .dashboard-main { padding: 1.5rem; padding-bottom: 80px; }
+  }
+</style>
