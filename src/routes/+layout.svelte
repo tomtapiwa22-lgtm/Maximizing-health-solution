@@ -1,5 +1,6 @@
 <script>
-  // children is automatically provided in standard SvelteKit — no declaration needed
+  // ✅ Svelte 5 / Runes syntax
+  const children = $children();
 </script>
 
 <div class="app-container">
