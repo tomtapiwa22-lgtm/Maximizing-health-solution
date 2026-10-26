@@ -1,23 +1,10 @@
+// src/routes/_layout.server.ts
 import type { LayoutServerLoad } from './$types';
-import { supabase } from '$lib/supabase';
+import { getSession } from '@supabase/auth-helpers-sveltekit/server';
 
-export const load: LayoutServerLoad = async ({ request }) => {
-  const cookie = request.headers.get('cookie') || '';
-  
-  const { data: { session } } = await supabase.auth.getSessionFromCookie(cookie);
-
-  if (!session) {
-    return { user: null, profile: null };
-  }
-
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('full_name, role')
-    .eq('id', session.user.id)
-    .single();
-
+export const load: LayoutServerLoad = async (event) => {
+  // ✅ Use the new method — replaces getSessionFromCookie
   return {
-    user: session.user,
-    profile: profile || null
+    session: await getSession(event)
   };
 };
