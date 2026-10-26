@@ -1,6 +1,26 @@
 {
   "nodeVersion": "20.x",
-  "framework": "sveltekit",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build"
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://novella-books.co.zw https://novella-web-6d1dbv7vq-tapiwanashe-s-projects-e56c077b.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, apikey, Prefer, Accept, Cookie, X-Requested-With"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ]
 }
