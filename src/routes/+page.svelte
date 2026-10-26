@@ -1,269 +1,277 @@
-<svelte:head>
-  <title>Maximizing Health Solution</title>
-  <meta name="description" content="Your trusted partner for better health and wellness — because every life matters" />
-</svelte:head>
-
-<nav class="navbar">
-  <div class="container">
-    <a href="/" class="brand">
-      <span class="logo-icon">♡</span>
-      <span class="logo-text">Maximizing Health</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/" class="active">Home</a></li>
-      <li><a href="/services">Services</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
-      <li class="nav-divider" aria-hidden="true"></li>
-      <li><a href="/login" class="btn-login">Login</a></li>
-    </ul>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
-  </div>
-</nav>
-
 <section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <p class="hero-intro">Not just health care — heart care</p>
-    <h1>Your Health, Your Dignity, Our Purpose</h1>
-    <p class="hero-subtext">Every person is unique. Every story matters. We stand beside you with compassion, clarity, and unwavering care — because your life deserves nothing less.</p>
-    <div class="hero-buttons">
-      <a href="/contact" class="btn-primary">Begin Your Journey</a>
-      <a href="/about" class="btn-secondary">Meet Our Heart</a>
+  <div class="hero-gradient"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p class="tagline">Welcome to Maxi-Mize Health Solutions</p>
+        <h1>Your Health, Your Dignity, Our Care</h1>
+        <p class="hero-desc">
+          Compassionate support tailored to you. We listen, we understand, 
+          and we’re here every step of the way — because your wellbeing matters most.
+        </p>
+        <div class="hero-buttons">
+          <a href="/contact" class="btn-primary">Get in Touch</a>
+          <a href="/our-care" class="btn-secondary">Our Services</a>
+        </div>
+        <p class="hero-note">No pressure, no obligation — just honest care</p>
+      </div>
+      <div class="hero-image">
+        <img 
+          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600&h=500" 
+          alt="Compassionate care and support"
+          loading="lazy"
+        />
+      </div>
     </div>
   </div>
-  <div class="hero-shape"></div>
 </section>
 
-<section class="values">
+<section class="features">
   <div class="container">
-    <div class="values-header">
-      <p class="values-tagline">Guided by what truly counts</p>
-      <h2>More Than Wellness — It’s Personal</h2>
-      <p class="values-lead">We don’t just treat conditions — we see the whole you. Your hopes, your comfort, your peace of mind — these are at the centre of everything we do.</p>
+    <div class="section-head">
+      <p class="section-tagline">Why Choose Us</p>
+      <h2>Care Built Around You</h2>
+      <p>Trusted, transparent, and truly personal — support that sees the whole you.</p>
     </div>
-    <div class="grid">
-      <div class="value-card">
-        <div class="card-icon">🤍</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon">🤝</div>
         <h3>Compassion First</h3>
-        <p>Kindness isn’t extra — it’s the foundation. We listen deeply and meet you where you are, with respect and warmth in every conversation.</p>
+        <p>Kindness is our foundation. We meet you where you are, with respect and warmth always.</p>
       </div>
-      <div class="value-card">
-        <div class="card-icon">✦</div>
-        <h3>Tailored to You</h3>
-        <p>No two journeys are the same. Your plan is built around your life, your goals, and what makes you feel most like you.</p>
+      <div class="feature-card">
+        <div class="icon">📋</div>
+        <h3>Tailored Support</h3>
+        <p>Every journey is unique. Your care plan is built around your life, your goals, your wishes.</p>
       </div>
-      <div class="value-card">
-        <div class="card-icon">🛡</div>
-        <h3>Safe & Trusted</h3>
-        <p>Transparency, dignity, and reliability. You can rest easy knowing you’re supported by a team that honours your trust above all else.</p>
+      <div class="feature-card">
+        <div class="icon">🛡️</div>
+        <h3>Trusted & Reliable</h3>
+        <p>Transparent, dependable, and fully accountable. You can rest easy knowing you’re in safe hands.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💙</div>
+        <h3>Always Available</h3>
+        <p>Here when you need us. Call, email, or message — we respond promptly and with care.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="impact">
-  <div class="impact-inner">
-    <div class="impact-content">
-      <h2>“You matter. Your health matters. We are here to help you thrive.”</h2>
-      <p>Every step we take is with one aim: to give you the confidence and care to live fully, every single day.</p>
-      <a href="/services" class="btn-soft">See How We Support You →</a>
+<section class="quote-section">
+  <div class="container quote-inner">
+    <blockquote>
+      "We don't just provide care — we stand beside you. Your confidence, comfort, 
+      and peace of mind are at the heart of everything we do."
+    </blockquote>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container cta-inner">
+    <h2>Ready to talk?</h2>
+    <p>Reaching out takes courage — and we’re honoured you’d consider us. Let’s see how we can help.</p>
+    <div class="cta-buttons">
+      <a href="tel:07727694903" class="btn-phone">📞 07727 694903</a>
+      <a href="/contact" class="btn-primary">Send a Message</a>
     </div>
   </div>
 </section>
-
-<section class="callout">
-  <div class="container">
-    <h2>Ready to take the next gentle step?</h2>
-    <p>Reaching out takes courage — and we’re honoured you’d consider us to walk this path with you.</p>
-    <a href="/contact" class="btn-primary">Get In Touch Today</a>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <p class="footer-heart">Caring deeply. Supporting fully. Always.</p>
-    <p>&copy; 2026 Maximizing Health Solution. All rights reserved.</p>
-  </div>
-</footer>
 
 <style>
   :root {
-    --primary: #14b8a6;
-    --primary-light: #5eead4;
-    --primary-soft: #ccfbf1;
-    --accent: #f43f5e;
-    --dark: #0f172a;
-    --mid: #475569;
+    --navy: #0a2540;
+    --blue: #1e40af;
+    --blue-light: #3b82f6;
+    --sky: #e0f2fe;
+    --pale: #f0f7ff;
+    --slate: #475569;
     --light: #f8fafc;
-    --shadow-soft: 0 10px 30px rgba(20, 184, 166, 0.08);
-    --shadow-lift: 0 20px 60px rgba(20, 184, 166, 0.12);
-    --radius: 16px;
-    --radius-lg: 24px;
+    --accent: #0ea5e9;
+    --shadow-soft: 0 8px 30px rgba(30, 64, 175, 0.08);
+    --shadow-lift: 0 16px 50px rgba(30, 64, 175, 0.12);
+    --radius: 14px;
+    --radius-lg: 20px;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-
-  /* Navigation */
-  .navbar {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(12px);
-    position: sticky; top: 0; z-index: 100;
-    border-bottom: 1px solid rgba(20, 184, 166, 0.08);
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-  .navbar .container {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 1rem; padding-bottom: 1rem;
-  }
-  .brand {
-    display: flex; align-items: center; gap: 0.6rem;
-    text-decoration: none; color: inherit;
-  }
-  .logo-icon { font-size: 1.5rem; color: var(--accent); }
-  .logo-text { font-size: 1.35rem; font-weight: 700; color: var(--primary); letter-spacing: -0.02em; }
-  .nav-links {
-    display: flex; list-style: none; gap: 1.8rem; align-items: center;
-  }
-  .nav-divider { width: 1px; height: 24px; background: #e2e8f0; }
-  .nav-links a {
-    text-decoration: none; color: var(--mid); font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  .nav-links a:hover, .nav-links a.active { color: var(--primary); }
-  .btn-login {
-    padding: 0.6rem 1.5rem; border-radius: 50px;
-    border: 1.5px solid var(--primary); color: var(--primary) !important;
-    font-weight: 600; transition: all 0.3s ease;
-  }
-  .btn-login:hover {
-    background: var(--primary); color: white !important;
-    transform: translateY(-2px); box-shadow: var(--shadow-soft);
-  }
-  .mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
 
   /* Hero */
   .hero {
-    position: relative; overflow: hidden;
-    background: linear-gradient(135deg, #0d9488 0%, #5eead4 50%, #ccfbf1 100%);
-    padding: 6rem 1.5rem 8rem; text-align: center;
+    position: relative;
+    padding: 5rem 1.5rem 7rem;
+    overflow: hidden;
   }
-  .hero-overlay {
+  .hero-gradient {
     position: absolute; inset: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 60%);
+    background: linear-gradient(135deg, var(--pale) 0%, var(--sky) 100%);
+    z-index: -1;
   }
-  .hero-content {
-    position: relative; z-index: 1; max-width: 900px; margin: 0 auto;
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
   }
-  .hero-intro {
-    color: #0f766e; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-    font-size: 0.95rem; margin-bottom: 1rem;
+  .tagline {
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
   }
-  .hero h1 {
-    font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.1; color: var(--dark);
-    margin-bottom: 1.5rem; font-weight: 800;
+  .hero-text h1 {
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
   }
-  .hero-subtext {
-    font-size: 1.2rem; line-height: 1.7; color: #134e4a;
-    max-width: 700px; margin: 0 auto 2.5rem;
+  .hero-desc {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--slate);
+    margin-bottom: 2rem;
   }
   .hero-buttons {
-    display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+    display: flex; gap: 1.2rem; margin-bottom: 1rem; flex-wrap: wrap;
   }
   .btn-primary {
-    padding: 0.95rem 2.4rem; border-radius: 50px; font-weight: 700;
-    text-decoration: none; transition: all 0.3s ease;
-    background: var(--dark); color: white;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+    padding: 0.9rem 2.2rem;
+    background: var(--blue);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
   }
   .btn-primary:hover {
-    transform: translateY(-3px); box-shadow: var(--shadow-lift);
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
   }
   .btn-secondary {
-    padding: 0.95rem 2.4rem; border-radius: 50px; font-weight: 700;
-    text-decoration: none; background: transparent; color: var(--dark);
-    border: 2px solid rgba(15, 23, 42, 0.15); transition: all 0.3s ease;
+    padding: 0.9rem 2.2rem;
+    border: 2px solid var(--blue);
+    color: var(--blue);
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
   }
   .btn-secondary:hover {
-    border-color: var(--primary); color: var(--primary);
-    transform: translateY(-3px);
+    background: var(--blue);
+    color: white;
   }
-  .hero-shape {
-    position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
-    background: linear-gradient(to bottom right, white 50%, #f0fdfa 50%);
-    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+  .hero-note {
+    font-size: 0.9rem;
+    color: var(--slate);
+    opacity: 0.8;
+  }
+  .hero-image img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lift);
+    object-fit: cover;
   }
 
-  /* Values Section */
-  .values { padding: 5rem 1.5rem 6rem; background: white; }
-  .values-header { text-align: center; max-width: 750px; margin: 0 auto 4rem; }
-  .values-tagline {
-    color: var(--accent); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-    font-size: 0.9rem; margin-bottom: 0.8rem;
+  /* Features */
+  .features { padding: 5rem 1.5rem 6rem; background: white; }
+  .section-head { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+  .section-tagline {
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
   }
-  .values h2 { font-size: 2.3rem; color: var(--dark); margin-bottom: 1rem; }
-  .values-lead { font-size: 1.1rem; color: var(--mid); line-height: 1.7; }
-  .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+  .section-head h2 {
+    font-size: 2.2rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
   }
-  .value-card {
-    background: linear-gradient(180deg, #f0fdfa, white);
-    padding: 2.5rem; border-radius: var(--radius-lg);
-    border: 1px solid var(--primary-soft);
-    transition: all 0.4s ease;
+  .section-head p { color: var(--slate); font-size: 1.1rem; line-height: 1.7; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
   }
-  .value-card:hover {
-    transform: translateY(-8px); box-shadow: var(--shadow-lift);
-    border-color: var(--primary-light);
+  .feature-card {
+    background: var(--pale);
+    padding: 2.2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(30, 64, 175, 0.08);
+    transition: all 0.35s ease;
   }
-  .card-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .value-card h3 {
-    color: var(--primary); font-size: 1.3rem; margin-bottom: 1rem;
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--blue-light);
   }
-  .value-card p { color: var(--mid); line-height: 1.7; }
+  .icon { font-size: 2rem; margin-bottom: 1rem; }
+  .feature-card h3 {
+    color: var(--navy);
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  .feature-card p { color: var(--slate); line-height: 1.7; }
 
-  /* Impact Quote Section */
-  .impact {
-    background: linear-gradient(135deg, #0f766e, #14b8a6);
+  /* Quote */
+  .quote-section {
+    background: linear-gradient(135deg, var(--blue), var(--blue-light));
     padding: 5rem 1.5rem;
+    text-align: center;
   }
-  .impact-inner {
-    max-width: 800px; margin: 0 auto; text-align: center;
+  .quote-inner { max-width: 800px; }
+  blockquote {
+    color: white;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-style: italic;
   }
-  .impact h2 {
-    color: white; font-size: 2rem; line-height: 1.4; margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-  .impact p {
-    color: #ccfbf1; font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7;
-  }
-  .btn-soft {
-    color: white; font-weight: 600; text-decoration: none;
-    border-bottom: 2px solid rgba(255,255,255,0.3);
-    padding-bottom: 0.2rem; transition: all 0.3s ease;
-  }
-  .btn-soft:hover { border-bottom-color: white; }
 
-  /* Callout */
-  .callout {
-    padding: 5rem 1.5rem; text-align: center; background: #f0fdfa;
+  /* CTA */
+  .cta-section {
+    padding: 5rem 1.5rem;
+    background: var(--pale);
+    text-align: center;
   }
-  .callout h2 { font-size: 2rem; color: var(--dark); margin-bottom: 1rem; }
-  .callout p { max-width: 600px; margin: 0 auto 2rem; color: var(--mid); font-size: 1.1rem; line-height: 1.7; }
-
-  /* Footer */
-  .footer {
-    background: var(--dark); color: white; text-align: center;
-    padding: 3rem 1.5rem;
+  .cta-inner h2 {
+    font-size: 2.2rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
   }
-  .footer-heart { color: var(--primary-light); margin-bottom: 0.5rem; font-weight: 500; }
-  .footer p { opacity: 0.7; font-size: 0.95rem; }
+  .cta-inner p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: var(--slate);
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  .cta-buttons {
+    display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-phone {
+    padding: 0.9rem 2.2rem;
+    background: white;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .btn-phone:hover {
+    background: var(--blue);
+    color: white;
+  }
 
   /* Responsive */
-  @media (max-width: 768px) {
-    .nav-links { gap: 1rem; }
-    .nav-divider { display: none; }
-    .hero { padding: 4rem 1.5rem 6rem; }
-    .impact h2 { font-size: 1.5rem; }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+    .hero-buttons, .cta-buttons { justify-content: center; }
   }
 </style>
