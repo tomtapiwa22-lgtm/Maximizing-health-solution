@@ -3,7 +3,6 @@ import type { LayoutServerLoad } from './$types';
 import { createServerClient } from '@supabase/ssr';
 
 export const load: LayoutServerLoad = async (event) => {
-  // Create Supabase server client — replaces deprecated auth-helpers
   const supabase = createServerClient(
     import.meta.env.VITE_SUPABASE_URL,
     import.meta.env.VITE_SUPABASE_ANON_KEY,
@@ -20,11 +19,11 @@ export const load: LayoutServerLoad = async (event) => {
     }
   );
 
-  // Get current session — replaces getSessionFromCookie
+  // ✅ ONLY get the session — DON'T return the supabase client!
   const { data: { session } } = await supabase.auth.getSession();
 
   return {
-    session,
-    supabase
+    session
+    // ❌ REMOVED: supabase
   };
 };
