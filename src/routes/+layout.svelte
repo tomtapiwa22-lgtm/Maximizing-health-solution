@@ -1,10 +1,10 @@
 <script>
-  // ✅ In SvelteKit, $children is built-in — no destructuring needed
+  // ✅ CORRECT Svelte 5 / Runes syntax
+  const children = $children();
 </script>
 
 <div class="app-container">
   <main class="content">
-    <!-- ✅ Correct SvelteKit slot syntax -->
     {@render children()}
   </main>
 </div>
