@@ -1,3 +1,5 @@
 {
-  "framework": "sveltekit"
+  "build": {
+    "nodeVersion": "20.x"
+  }
 }
