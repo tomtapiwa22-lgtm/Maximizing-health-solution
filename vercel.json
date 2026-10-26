@@ -1,3 +1,5 @@
-#{
-  "nodeVersion": "20.x"
+{
+  "build": {
+    "nodeVersion": "20.x"
+  }
 }
