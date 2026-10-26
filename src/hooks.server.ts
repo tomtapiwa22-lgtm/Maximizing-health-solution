@@ -1,26 +1,27 @@
+// src/hooks.server.ts
+import { createServerClient } from '@supabase/ssr';
 import type { Handle } from '@sveltejs/kit';
-import { supabase } from '$lib/supabase';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  // Get session from cookie
-  const cookie = event.request.headers.get('cookie') || '';
-  const { data: { session } } = await supabase.auth.getSessionFromCookie(cookie);
+  event.locals.supabase = createServerClient(
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_ANON_KEY,
+    {
+      cookies: {
+        get: (name) => event.cookies.get(name),
+        set: (name, value, options) => {
+          event.cookies.set(name, value, { ...options, path: '/' });
+        },
+        remove: (name, options) => {
+          event.cookies.delete(name, { ...options, path: '/' });
+        }
+      }
+    }
+  );
 
-  // Make user available in locals
+  // Convenience: get session once here
+  const { data: { session } } = await event.locals.supabase.auth.getSession();
   event.locals.session = session;
-  event.locals.user = session?.user || null;
-
-  // Load profile if logged in
-  if (session?.user) {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('full_name, role')
-      .eq('id', session.user.id)
-      .single();
-    event.locals.profile = profile;
-  } else {
-    event.locals.profile = null;
-  }
 
   return resolve(event);
 };
