@@ -1,176 +1,214 @@
-			/* ===== PREMIUM LANDING STYLES ===== */
-			html {
-				scroll-behavior: smooth !important;
-			}
- 
-			.hero {
-				background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%) !important;
-				color: white !important;
-				padding: 6rem 1.5rem !important;
-				text-align: center !important;
-				position: relative !important;
-				overflow: hidden !important;
-			}
+<script lang="ts">
+  import { goto } from '$app/navigation';
 
-			.hero-inner {
-				max-width: 900px !important;
-				margin: 0 auto !important;
-				position: relative !important;
-				z-index: 2 !important;
-			}
+  // Reactive state (Svelte 5 runes)
+  let email = $state('');
+  let password = $state('');
+  let loading = $state(false);
+  let error = $state('');
 
-			.hero h1 {
-				font-size: clamp(2.5rem, 6vw, 3.8rem) !important;
-				margin-bottom: 1.5rem !important;
-				line-height: 1.2 !important;
-			}
+  async function handleLogin() {
+    error = '';
+    loading = true;
 
-			.hero h1 span {
-				color: #ccfbf1 !important;
-			}
+    // Basic client-side validation
+    if (!email.trim() || !password) {
+      error = 'Please enter both email and password';
+      loading = false;
+      return;
+    }
 
-			.hero p {
-				font-size: 1.25rem !important;
-				margin-bottom: 2.5rem !important;
-				opacity: 0.95 !important;
-				max-width: 600px !important;
-				margin-left: auto !important;
-				margin-right: auto !important;
-			}
+    try {
+      // Replace with your actual Supabase/auth call
+      // const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+      // if (authError) throw authError;
 
-			.hero-buttons {
-				display: flex !important;
-				gap: 1rem !important;
-				justify-content: center !important;
-				flex-wrap: wrap !important;
-			}
+      // Simulate network delay — remove when connecting real auth
+      await new Promise(resolve => setTimeout(resolve, 600));
 
-			.btn {
-				display: inline-block !important;
-				padding: 0.9rem 2.2rem !important;
-				border-radius: 50px !important;
-				font-weight: 600 !important;
-				transition: all 0.3s ease !important;
-				cursor: pointer !important;
-				border: none !important;
-				font-size: 1rem !important;
-			}
+      // Success: redirect to appropriate dashboard
+      await goto('/dashboard/carer');
+    } catch (err) {
+      error = err instanceof Error ? err.message : 'Login failed. Please try again.';
+    } finally {
+      loading = false;
+    }
+  }
+</script>
 
-			.btn.primary {
-				background: white !important;
-				color: #0d9488 !important;
-			}
+<div class="login-page">
+  <div class="login-card">
+    <h1>Sign In</h1>
+    <p class="subtitle">Access your care management dashboard</p>
 
-			.btn.primary:hover {
-				transform: translateY(-3px) !important;
-				box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
-			}
+    {#if error}
+      <div class="error-banner" role="alert" aria-live="polite">
+        {error}
+      </div>
+    {/if}
 
-			.btn.secondary {
-				background: transparent !important;
-				color: white !important;
-				border: 2px solid rgba(255,255,255,0.4) !important;
-			}
+    <form onsubmit|preventdefault={handleLogin} class="login-form">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          bind:value={email}
+          autocomplete="username"
+          disabled={loading}
+          required
+        />
+      </div>
 
-			.btn.secondary:hover {
-				background: rgba(255,255,255,0.15) !important;
-				border-color: white !important;
-			}
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          bind:value={password}
+          autocomplete="current-password"
+          disabled={loading}
+          required
+        />
+      </div>
 
-			.btn.large {
-				padding: 1.1rem 2.8rem !important;
-				font-size: 1.1rem !important;
-			}
+      <button
+        type="submit"
+        class="submit-btn"
+        disabled={loading}
+        aria-busy={loading}
+      >
+        {loading ? 'Signing in…' : 'Sign In'}
+      </button>
+    </form>
 
-			/* Stats Section */
-			.stats {
-				padding: 3rem 1.5rem !important;
-				background: white !important;
-				margin-top: -2rem !important;
-				position: relative !important;
-				z-index: 3 !important;
-			}
+    <p class="forgot-link">
+      <a href="/auth/forgot-password">Forgot your password?</a>
+    </p>
 
-			.stats .grid {
-				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-				gap: 2rem !important;
-			}
+    <p class="no-signup">
+      Need access? Please contact your administrator to request an account.
+    </p>
+  </div>
+</div>
 
-			.stat-card {
-				text-align: center !important;
-				padding: 1.5rem !important;
-			}
+<style>
+  .login-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  }
 
-			.stat-card h3 {
-				font-size: 2.5rem !important;
-				color: var(--primary) !important;
-				font-weight: 700 !important;
-				margin-bottom: 0.5rem !important;
-			}
+  .login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  }
 
-			.stat-card p {
-				color: var(--text-muted) !important;
-				font-weight: 500 !important;
-			}
+  h1 {
+    margin: 0 0 0.25rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #102a43;
+  }
 
-			/* Features Section */
-			.section-header {
-				text-align: center !important;
-				max-width: 700px !important;
-				margin: 0 auto 4rem !important;
-			}
+  .subtitle {
+    margin: 0 0 2rem;
+    color: #486581;
+  }
 
-			.section-header h2 {
-				font-size: 2.2rem !important;
-				color: var(--dark) !important;
-				margin-bottom: 1rem !important;
-			}
+  .error-banner {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    background: #fff2f2;
+    border-left: 4px solid #e53e3e;
+    color: #b91c1c;
+    border-radius: 0.25rem;
+  }
 
-			.section-header p {
-				color: var(--text-muted) !important;
-				font-size: 1.1rem !important;
-			}
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
 
-			.feature-card {
-				background: white !important;
-				padding: 2.5rem !important;
-				border-radius: 16px !important;
-				box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important;
-				transition: all 0.3s ease !important;
-			}
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-			.feature-card:hover {
-				transform: translateY(-6px) !important;
-				box-shadow: 0 12px 30px rgba(45, 212, 191, 0.12) !important;
-			}
+  label {
+    font-weight: 500;
+    color: #243b53;
+  }
 
-			.feature-card .icon {
-				font-size: 2.5rem !important;
-				margin-bottom: 1rem !important;
-			}
+  input {
+    padding: 0.875rem 1rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
 
-			.feature-card h3 {
-				color: var(--dark) !important;
-				margin-bottom: 1rem !important;
-				font-size: 1.25rem !important;
-			}
+  input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+  }
 
-			.feature-card p {
-				color: var(--text-muted) !important;
-				margin-bottom: 1.2rem !important;
-				line-height: 1.7 !important;
-			}
+  input:disabled {
+    background: #f7fafc;
+    cursor: not-allowed;
+  }
 
-			.card-link {
-				color: var(--primary) !important;
-				font-weight: 600 !important;
-				display: inline-block !important;
-				transition: transform 0.2s !important;
-			}
+  .submit-btn {
+    padding: 0.875rem;
+    margin-top: 0.5rem;
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
 
-			.card-link:hover {
-				transform: translateX(4px) !important;
-			}
+  .submit-btn:hover:not(:disabled) {
+    background: #2c5282;
+  }
 
-			/* Why Us Section */
-			.
+  .submit-btn:disabled {
+    background: #90cdf4;
+    cursor: not-allowed;
+  }
+
+  .forgot-link {
+    margin: 1.25rem 0 0;
+    text-align: center;
+  }
+
+  .forgot-link a {
+    color: #2b6cb0;
+    text-decoration: none;
+  }
+
+  .forgot-link a:hover {
+    text-decoration: underline;
+  }
+
+  .no-signup {
+    margin: 1.5rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #718096;
+  }
+</style>
