@@ -71,37 +71,5 @@
   </div>
 </footer>
 
-<style>
-  :root {
-    --primary: #2dd4bf;
-    --dark: #1e293b;
-    --light: #f8fafc;
-  }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
 
-  .navbar { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1rem 0; position: sticky; top: 0; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-  .navbar .container { display: flex; justify-content: space-between; align-items: center; }
-  .logo { font-size: 1.4rem; color: var(--primary); }
-  .nav-links { display: flex; list-style: none; gap: 2rem; }
-  .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: color 0.3s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--primary); }
-
-  .hero { background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%); color: white; padding: 5rem 1.5rem; text-align: center; }
-  .hero-content { max-width: 800px; margin: 0 auto; }
-  .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
-  .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
-  .btn-primary { display: inline-block; background: white; color: #0d9488; padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; transition: transform 0.3s; }
-  .btn-primary:hover { transform: translateY(-3px); }
-
-  .features { padding: 5rem 1.5rem; background: #f0fdfa; }
-  .features h2 { text-align: center; font-size: 2.2rem; color: var(--dark); margin-bottom: 3rem; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-  .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.3s; }
-  .card:hover { transform: translateY(-5px); }
-  .card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
-  .card p { color: #64748b; line-height: 1.6; }
-
-  .footer { background: var(--dark); color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
-</style>
