@@ -1,39 +1,160 @@
 <svelte:head>
-  <title>Login — Maxi-Mize Health Solutions</title>
+  <title>Login — Maximise Health Solutions</title>
   <meta name="description" content="Sign in to your account" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+
+    :root {
+      --primary: #10B981;
+      --secondary: #059669;
+      --accent: #F59E0B;
+      --light: #ECFDF5;
+      --dark: #1F2937;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --white: #FFFFFF;
+      --radius: 14px;
+    }
+
+    .login-page {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      min-height: 100vh !important;
+      background: linear-gradient(180deg, #ECFDF5 0%, #FFFFFF 100%) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 2rem 1rem !important;
+    }
+
+    .login-card {
+      background: var(--white) !important;
+      padding: 2.5rem !important;
+      border-radius: var(--radius) !important;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15) !important;
+      width: 100% !important;
+      max-width: 420px !important;
+    }
+
+    .login-card h1 {
+      text-align: center !important;
+      color: var(--secondary) !important;
+      margin-bottom: 0.5rem !important;
+      font-size: 1.75rem !important;
+    }
+
+    .subtext {
+      text-align: center !important;
+      color: var(--muted) !important;
+      margin-bottom: 2rem !important;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem !important;
+    }
+
+    .form-group label {
+      display: block !important;
+      margin-bottom: 0.5rem !important;
+      font-weight: 500 !important;
+      color: var(--dark) !important;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100% !important;
+      padding: 0.85rem 1rem !important;
+      border: 2px solid var(--border) !important;
+      border-radius: 8px !important;
+      font-size: 1rem !important;
+      transition: border-color 0.2s ease !important;
+      background: var(--white) !important;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none !important;
+      border-color: var(--primary) !important;
+    }
+
+    .signin-btn {
+      width: 100% !important;
+      padding: 0.9rem !important;
+      background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+      color: var(--white) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-size: 1rem !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      margin-top: 0.5rem !important;
+    }
+
+    .signin-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25) !important;
+    }
+
+    .help-text {
+      margin-top: 1.5rem !important;
+      text-align: center !important;
+      color: var(--muted) !important;
+      font-size: 0.9rem !important;
+    }
+
+    .help-text a {
+      color: var(--primary) !important;
+      text-decoration: none !important;
+      font-weight: 500 !important;
+    }
+
+    .help-text a:hover {
+      text-decoration: underline !important;
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 2rem 1.5rem !important;
+      }
+    }
+  </style>
 </svelte:head>
 
 <div class="login-page">
-  <main class="login-container">
-    <div class="login-card">
-      <h1>Welcome Back</h1>
-      <p class="subtext">Sign in to access your dashboard</p>
+  <main class="login-card">
+    <h1>Welcome Back</h1>
+    <p class="subtext">Sign in to access your dashboard</p>
 
-      <form on:submit|preventDefault={handleLogin}>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" bind:value={email} placeholder="your@email.com" required />
-        </div>
+    <form on:submit|preventDefault={handleLogin}>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" bind:value={email} placeholder="your@email.com" required />
+      </div>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" bind:value={password} placeholder="••••••••" required />
-        </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" bind:value={password} placeholder="••••••••" required />
+      </div>
 
-        <div class="form-group">
-          <label>I am signing in as</label>
-          <select bind:value={selectedRole}>
-            <option value="client">Client</option>
-            <option value="carer">Carer</option>
-            <option value="admin">Administrator</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>I am signing in as</label>
+        <select bind:value={selectedRole}>
+          <option value="client">Client</option>
+          <option value="carer">Carer</option>
+          <option value="admin">Administrator</option>
+        </select>
+      </div>
 
-        <button type="submit" class="signin-btn">Sign In</button>
-      </form>
+      <button type="submit" class="signin-btn">Sign In</button>
+    </form>
 
-      <p class="help-text">Need help? <a href="/contact">Contact us</a></p>
-    </div>
+    <p class="help-text">Need help? <a href="/contact">Contact us</a></p>
   </main>
 </div>
 
@@ -46,105 +167,3 @@
     window.location.href = `/dashboard/${selectedRole}`;
   }
 </script>
-
-<style>
-  :root {
-    --blue-50: #f0f9ff;
-    --blue-500: #0ea5e9;
-    --blue-600: #0284c7;
-    --blue-700: #0369a1;
-    --dark: #0c4a6e;
-    --grey: #64748b;
-    --white: #ffffff;
-    --radius: 12px;
-  }
-
-  .login-page {
-    min-height: calc(100vh - 140px);
-    background: var(--blue-50);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-  }
-
-  .login-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.12);
-    width: 100%;
-    max-width: 420px;
-  }
-
-  .login-card h1 {
-    text-align: center;
-    color: var(--dark);
-    margin-bottom: 0.5rem;
-    font-size: 1.75rem;
-  }
-
-  .subtext {
-    text-align: center;
-    color: var(--grey);
-    margin-bottom: 2rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.25rem;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--dark);
-  }
-
-  .form-group input,
-  .form-group select {
-    width: 100%;
-    padding: 0.85rem 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: var(--blue-500);
-  }
-
-  .signin-btn {
-    width: 100%;
-    padding: 0.9rem;
-    background: var(--blue-600);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-
-  .signin-btn:hover {
-    background: var(--blue-700);
-    transform: translateY(-2px);
-  }
-
-  .help-text {
-    margin-top: 1.5rem;
-    text-align: center;
-    color: var(--grey);
-    font-size: 0.9rem;
-  }
-
-  .help-text a {
-    color: var(--blue-600);
-    text-decoration: none;
-    font-weight: 500;
-  }
-</style>
