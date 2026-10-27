@@ -1,11 +1,11 @@
 <script>
-  // Standard SvelteKit — children is provided automatically
-  // NO declaration needed here at all
+  // Standard SvelteKit — slot renders page content automatically
+  // NO children / render needed here
 </script>
 
 <div class="app-container">
   <main class="content">
-    {@render children()}
+    <slot />
   </main>
 </div>
 
