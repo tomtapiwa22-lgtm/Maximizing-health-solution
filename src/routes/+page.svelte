@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	// Page Content — easy to update
 	const business = {
 		name: "Maximise Health Solutions",
 		tagline: "Your Partner in Better Health & Wellness",
@@ -63,6 +62,18 @@
 </svelte:head>
 
 <div class="health-page">
+	<!-- Navigation -->
+	<nav class="navbar">
+		<div class="nav-container">
+			<a href="/" class="nav-brand">{business.name}</a>
+			<div class="nav-links">
+				<a href="/" class="nav-link">Home</a>
+				<a href="#services" class="nav-link">Our Services</a>
+				<a href="/login" class="nav-link">Login</a>
+			</div>
+		</div>
+	</nav>
+
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="hero-content">
@@ -125,13 +136,18 @@
 			<a href="/contact" class="btn primary large">Get In Touch</a>
 		</div>
 	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<p>&copy; {new Date().getFullYear()} {business.name}. All rights reserved.</p>
+	</footer>
 </div>
 
 <style>
 	:root {
-		--primary: #10B981; /* fresh green — health & vitality */
-		--secondary: #059669; /* deeper green */
-		--accent: #F59E0B; /* warm amber for highlights */
+		--primary: #10B981;
+		--secondary: #059669;
+		--accent: #F59E0B;
 		--light: #ECFDF5;
 		--dark: #1F2937;
 		--muted: #6B7280;
@@ -146,6 +162,43 @@
 		background: linear-gradient(to bottom, #F0FDF4, #FFFFFF);
 		font-family: system-ui, -apple-system, sans-serif;
 		line-height: 1.6;
+		min-height: 100vh;
+	}
+
+	/* Navigation */
+	.navbar {
+		background: white;
+		box-shadow: var(--shadow-sm);
+		padding: 1rem 2rem;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+	.nav-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.nav-brand {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--primary);
+		text-decoration: none;
+	}
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+	}
+	.nav-link {
+		text-decoration: none;
+		color: var(--dark);
+		font-weight: 500;
+		transition: var(--transition);
+	}
+	.nav-link:hover {
+		color: var(--primary);
 	}
 
 	/* Hero */
@@ -348,8 +401,21 @@
 		line-height: 2;
 	}
 
+	/* Footer */
+	.footer {
+		text-align: center;
+		padding: 2rem;
+		color: var(--muted);
+		font-size: 0.9rem;
+		border-top: 1px solid #E5E7EB;
+		margin-top: 2rem;
+	}
+
 	/* Mobile */
 	@media (max-width: 768px) {
+		.nav-links {
+			gap: 1rem;
+		}
 		.hero {
 			grid-template-columns: 1fr;
 			text-align: center;
