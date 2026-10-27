@@ -52,14 +52,12 @@
   let selectedRole = 'client';
 
   function handleLogin() {
-    // Navigate to role-specific dashboard
     window.location.href = `/dashboard/${selectedRole}`;
   }
 </script>
 
 <style>
   :root {
-    /* ✅ Matched to your new professional blue palette */
     --primary-light: #0ea5e9;
     --primary: #0284c7;
     --primary-dark: #0369a1;
@@ -199,10 +197,6 @@
     box-shadow: 0 10px 25px rgba(2, 132, 199, 0.3);
   }
 
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-
   .login-note {
     margin-top: 1.5rem;
     font-size: 0.9rem;
@@ -224,22 +218,12 @@
   }
 
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 480px) {
-    .login-card {
-      padding: 2rem 1.5rem;
-    }
-    .login-card h1 {
-      font-size: 1.5rem;
-    }
+    .login-card { padding: 2rem 1.5rem; }
+    .login-card h1 { font-size: 1.5rem; }
   }
 </style>
