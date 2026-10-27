@@ -25,7 +25,6 @@
   </header>
 
   <main class="page-content">
-    <!-- ✅ CORRECT — This is the ONLY right way in SvelteKit 1.0+ -->
     <slot />
   </main>
 
@@ -36,7 +35,7 @@
   </footer>
 </div>
 
-<style>
+<style global>
   :root {
     --primary: #0d9488;
     --primary-dark: #0f766e;
