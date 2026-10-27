@@ -1,12 +1,12 @@
-<nav>
-  <a href="/">Home</a>
-  <a href="/login">Login</a>
-</nav>
-
-<main>
-  <slot />
-</main>
-
-<footer>
-  © 2026 Maxi-Mize Health Solutions
-</footer>
+<!-- src/routes/+layout.svelte -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<slot />  <!-- This is where your page content renders -->
+</body>
+</html>
