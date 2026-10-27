@@ -2,7 +2,7 @@
 			html {
 				scroll-behavior: smooth !important;
 			}
-
+ 
 			.hero {
 				background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%) !important;
 				color: white !important;
