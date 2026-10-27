@@ -44,7 +44,8 @@
     padding: 1.2rem 0;
     background: var(--white);
     box-shadow: var(--shadow-sm);
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 100;
   }
 
@@ -146,6 +147,7 @@
       width: 100%;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 0.5rem;
     }
   }
 </style>
@@ -159,7 +161,8 @@
         <a href="/services" class="nav-link">Our Services</a>
         <a href="/about" class="nav-link">About Us</a>
         <a href="/contact" class="cta-button">Get in Touch</a>
-        <button class="login-btn" on:click={() => window.location.href = '/login'}>Log In</button>
+        <!-- ✅ LOGIN BUTTON — links directly to your /login page -->
+        <a href="/login" class="login-btn">Log In</a>
       </nav>
     </div>
   </header>
