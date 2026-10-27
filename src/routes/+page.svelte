@@ -1,3 +1,25 @@
+<script>
+  console.log('✅ [+page.svelte] Script executed');
+  
+  if (typeof document !== 'undefined') {
+    setTimeout(() => {
+      console.log('🎨 [+page.svelte] Checking styles...');
+      const bodyStyle = getComputedStyle(document.body);
+      console.log('📋 Body font:', bodyStyle.fontFamily);
+      console.log('📋 Body background:', bodyStyle.backgroundColor);
+      
+      // Test if CSS variables are available
+      const testEl = document.querySelector('.hero');
+      if (testEl) {
+        const heroStyle = getComputedStyle(testEl);
+        console.log('📋 Hero background found:', heroStyle.background !== 'none' ? '✅ YES' : '❌ NO');
+      } else {
+        console.log('❌ [+page.svelte] Hero element not found yet');
+      }
+    }, 50);
+  }
+</script>
+
 <svelte:head>
   <title>Maximizing Health Solution</title>
   <meta name="description" content="Your trusted partner for better health and wellness" />
