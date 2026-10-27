@@ -1,22 +1,15 @@
 <script lang="ts">
-  // Add shared logic here later if needed
+  // Shared logic here
 </script>
 
 <svelte:head>
-  <!-- Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Compassionate, person-centred health and care support" />
   <title>Maxi-Mize Health Solutions | Your Health, Your Dignity, Our Care</title>
-  
-  <!-- Base font from Google Fonts (clean & professional) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </svelte:head>
 
 <div class="site-wrapper">
-  <!-- Header / Navigation -->
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="brand">
@@ -31,12 +24,11 @@
     </div>
   </header>
 
-  <!-- Main Page Content -->
   <main class="page-content">
+    <!-- ✅ CORRECT — This is the ONLY right way in SvelteKit 1.0+ -->
     <slot />
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
       <p>© 2026 Maxi-Mize Health Solutions — Your Health, Your Dignity, Our Care</p>
@@ -45,41 +37,32 @@
 </div>
 
 <style>
-  /* Reset & Base */
   :root {
-    --primary: #0d9488;       /* Teal — professional & caring */
+    --primary: #0d9488;
     --primary-dark: #0f766e;
-    --secondary: #0ea5e9;     /* Sky blue — trust */
-    --text-dark: #1f2937;     /* Dark grey — easy to read */
+    --text-dark: #1f2937;
     --text-light: #6b7280;
     --bg-light: #f8fafc;
     --white: #ffffff;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
     --radius: 10px;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text-dark);
     line-height: 1.6;
-    background-color: var(--white);
+    background: var(--white);
   }
 
-  /* Site Structure */
   .site-wrapper {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
-  /* Header */
   .site-header {
     background: var(--white);
     box-shadow: var(--shadow-sm);
@@ -137,13 +120,11 @@
     transform: translateY(-1px);
   }
 
-  /* Main Content */
   .page-content {
     flex: 1;
     width: 100%;
   }
 
-  /* Footer */
   .site-footer {
     background: var(--bg-light);
     padding: 2rem 1.5rem;
@@ -157,16 +138,8 @@
     color: var(--text-light);
   }
 
-  /* Mobile Responsiveness */
   @media (max-width: 768px) {
-    .header-inner {
-      flex-direction: column;
-      text-align: center;
-    }
-    .main-nav {
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .header-inner { flex-direction: column; text-align: center; }
+    .main-nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
   }
 </style>
