@@ -1,11 +1,4 @@
 <style>
-  /* Global Reset & Variables */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   :root {
     --blue-50: #f0f9ff;
     --blue-100: #e0f2fe;
@@ -19,6 +12,12 @@
     --shadow-md: 0 6px 20px rgba(14, 165, 233, 0.12);
     --radius: 12px;
     --transition: all 0.3s ease;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
   body {
@@ -39,7 +38,7 @@
     padding: 0 1.5rem;
   }
 
-  /* Header */
+  /* Header — NO TEAL */
   .site-header {
     padding: 1.2rem 0;
     background: rgba(255, 255, 255, 0.9);
@@ -115,15 +114,12 @@
     background: var(--blue-500);
     color: var(--white);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
   }
 
-  /* Main Content */
   .page-content {
     flex: 1;
   }
 
-  /* Footer */
   .site-footer {
     background: var(--dark);
     color: var(--white);
@@ -137,7 +133,6 @@
     font-size: 0.9rem;
   }
 
-  /* Mobile */
   @media (max-width: 768px) {
     .site-header .container {
       justify-content: center;
