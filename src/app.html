@@ -7,7 +7,7 @@
 		<title>Maxi-Mize Health Solutions</title>
 		%sveltekit.head%
 		
-		<!-- GLOBAL STYLES — cannot be stripped by Svelte -->
+		<!-- GLOBAL STYLES — Fixed: removed conflicting !important flags -->
 		<style>
 			:root {
 				--primary: #2dd4bf;
@@ -20,26 +20,27 @@
 				--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
+			/* ✅ FIXED: No more !important blocking form styles */
 			* {
-				margin: 0 !important;
-				padding: 0 !important;
-				box-sizing: border-box !important;
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
 			}
 
 			html, body {
-				background: var(--light) !important;
-				font-family: system-ui, -apple-system, sans-serif !important;
-				color: var(--dark) !important;
-				line-height: 1.6 !important;
+				background: var(--light);
+				font-family: system-ui, -apple-system, sans-serif;
+				color: var(--dark);
+				line-height: 1.6;
 			}
 
 			a {
-				text-decoration: none !important;
-				color: inherit !important;
+				text-decoration: none;
+				color: inherit;
 			}
 
 			ul, ol {
-				list-style: none !important;
+				list-style: none;
 			}
 
 			.site-wrapper {
@@ -55,208 +56,206 @@
 			}
 
 			.site-header {
-				background: white !important;
-				box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
-				padding: 1rem 0 !important;
-				position: sticky !important;
-				top: 0 !important;
-				z-index: 100 !important;
+				background: white;
+				box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+				padding: 1rem 0;
+				position: sticky;
+				top: 0;
+				z-index: 100;
 			}
 
 			.site-header .container {
-				display: flex !important;
-				justify-content: space-between !important;
-				align-items: center !important;
-				flex-wrap: wrap !important;
-				gap: 1rem !important;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 1rem;
 			}
 
 			.brand {
-				font-size: 1.35rem !important;
-				font-weight: 700 !important;
-				color: var(--primary) !important;
-				transition: var(--transition) !important;
+				font-size: 1.35rem;
+				font-weight: 700;
+				color: var(--primary);
+				transition: var(--transition);
 			}
 
 			.brand:hover {
-				transform: scale(1.02) !important;
+				transform: scale(1.02);
 			}
 
 			.main-nav {
-				display: flex !important;
-				align-items: center !important;
-				gap: 1.25rem !important;
+				display: flex;
+				align-items: center;
+				gap: 1.25rem;
 			}
 
 			.nav-link {
-				color: var(--dark) !important;
-				font-weight: 500 !important;
-				transition: var(--transition) !important;
+				color: var(--dark);
+				font-weight: 500;
+				transition: var(--transition);
 			}
 
 			.nav-link:hover {
-				color: var(--primary) !important;
-				transform: translateY(-1px) !important;
+				color: var(--primary);
+				transform: translateY(-1px);
 			}
 
 			.cta-button {
-				background: var(--primary) !important;
-				color: white !important;
-				padding: 0.6rem 1.5rem !important;
-				border-radius: 999px !important;
-				font-weight: 600 !important;
-				transition: var(--transition) !important;
-				box-shadow: 0 2px 8px rgba(45, 212, 191, 0.25) !important;
+				background: var(--primary);
+				color: white;
+				padding: 0.6rem 1.5rem;
+				border-radius: 999px;
+				font-weight: 600;
+				transition: var(--transition);
+				box-shadow: 0 2px 8px rgba(45, 212, 191, 0.25);
 			}
 
 			.cta-button:hover {
-				background: var(--primary-dark) !important;
-				transform: translateY(-2px) !important;
-				box-shadow: 0 6px 16px rgba(45, 212, 191, 0.3) !important;
+				background: var(--primary-dark);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(45, 212, 191, 0.3);
 			}
 
-			/* 🔑 LOGIN BUTTON STYLES — THIS WAS MISSING! */
 			.login-btn {
-				border: 2px solid var(--primary) !important;
-				color: var(--primary-dark) !important;
-				background: transparent !important;
-				padding: 0.6rem 1.5rem !important;
-				border-radius: var(--radius) !important;
-				font-weight: 600 !important;
-				cursor: pointer !important;
-				font-size: 0.95rem !important;
-				transition: var(--transition) !important;
+				border: 2px solid var(--primary);
+				color: var(--primary-dark);
+				background: transparent;
+				padding: 0.6rem 1.5rem;
+				border-radius: var(--radius);
+				font-weight: 600;
+				cursor: pointer;
+				font-size: 0.95rem;
+				transition: var(--transition);
 			}
 
 			.login-btn:hover {
-				background: var(--primary) !important;
-				color: white !important;
-				transform: translateY(-2px) !important;
-				box-shadow: 0 6px 16px rgba(45, 212, 191, 0.25) !important;
+				background: var(--primary);
+				color: white;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(45, 212, 191, 0.25);
 			}
 
 			.hero {
-				background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%) !important;
-				color: white !important;
-				padding: 5rem 1.5rem !important;
-				text-align: center !important;
+				background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
+				color: white;
+				padding: 5rem 1.5rem;
+				text-align: center;
 			}
 
 			.hero h1 {
-				font-size: clamp(2.2rem, 5vw, 3rem) !important;
-				margin-bottom: 1rem !important;
+				font-size: clamp(2.2rem, 5vw, 3rem);
+				margin-bottom: 1rem;
 			}
 
 			.hero p {
-				font-size: 1.15rem !important;
-				margin-bottom: 2rem !important;
-				opacity: 0.92 !important;
-				max-width: 600px !important;
-				margin-left: auto !important;
-				margin-right: auto !important;
+				font-size: 1.15rem;
+				margin-bottom: 2rem;
+				opacity: 0.92;
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
 			}
 
 			.hero-btn {
-				display: inline-block !important;
-				background: white !important;
-				color: #0d9488 !important;
-				padding: 0.9rem 2.4rem !important;
-				border-radius: 999px !important;
-				font-weight: 600 !important;
-				transition: var(--transition) !important;
-				box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+				display: inline-block;
+				background: white;
+				color: #0d9488;
+				padding: 0.9rem 2.4rem;
+				border-radius: 999px;
+				font-weight: 600;
+				transition: var(--transition);
+				box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 			}
 
 			.hero-btn:hover {
-				transform: translateY(-3px) !important;
-				box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
+				transform: translateY(-3px);
+				box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 			}
 
 			.features {
-				padding: 5rem 1.5rem !important;
-				background: white !important;
+				padding: 5rem 1.5rem;
+				background: white;
 			}
 
 			.features h2 {
-				text-align: center !important;
-				font-size: clamp(1.8rem, 4vw, 2.2rem) !important;
-				color: var(--dark) !important;
-				margin-bottom: 3rem !important;
+				text-align: center;
+				font-size: clamp(1.8rem, 4vw, 2.2rem);
+				color: var(--dark);
+				margin-bottom: 3rem;
 			}
 
 			.grid {
-				display: grid !important;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
-				gap: 2rem !important;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
 			}
 
 			.card {
-				background: var(--light) !important;
-				padding: 2.2rem !important;
-				border-radius: var(--radius) !important;
-				box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
-				transition: var(--transition) !important;
+				background: var(--light);
+				padding: 2.2rem;
+				border-radius: var(--radius);
+				box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+				transition: var(--transition);
 				opacity: 0;
-				animation: fadeInUp 0.6s ease-out forwards !important;
+				animation: fadeInUp 0.6s ease-out forwards;
 			}
 
-			.card:nth-child(1) { animation-delay: 0.1s !important; }
-			.card:nth-child(2) { animation-delay: 0.2s !important; }
-			.card:nth-child(3) { animation-delay: 0.3s !important; }
+			.card:nth-child(1) { animation-delay: 0.1s; }
+			.card:nth-child(2) { animation-delay: 0.2s; }
+			.card:nth-child(3) { animation-delay: 0.3s; }
 
 			.card:hover {
-				transform: translateY(-6px) !important;
-				box-shadow: 0 12px 30px rgba(45, 212, 191, 0.15) !important;
+				transform: translateY(-6px);
+				box-shadow: 0 12px 30px rgba(45, 212, 191, 0.15);
 			}
 
 			.card h3 {
-				color: var(--primary) !important;
-				margin-bottom: 1rem !important;
-				font-size: 1.25rem !important;
+				color: var(--primary);
+				margin-bottom: 1rem;
+				font-size: 1.25rem;
 			}
 
 			.card p {
-				color: var(--text-muted) !important;
-				line-height: 1.7 !important;
+				color: var(--text-muted);
+				line-height: 1.7;
 			}
 
 			.site-footer {
-				background: var(--dark) !important;
-				color: white !important;
-				text-align: center !important;
-				padding: 2rem 1.5rem !important;
-				margin-top: auto !important;
+				background: var(--dark);
+				color: white;
+				text-align: center;
+				padding: 2rem 1.5rem;
+				margin-top: auto;
 			}
 
-			/* Animations */
 			@keyframes fadeInUp {
 				from {
-					opacity: 0 !important;
-					transform: translateY(25px) !important;
+					opacity: 0;
+					transform: translateY(25px);
 				}
 				to {
-					opacity: 1 !important;
-					transform: translateY(0) !important;
+					opacity: 1;
+					transform: translateY(0);
 				}
 			}
 
 			@media (max-width: 768px) {
 				.site-header .container {
-					flex-direction: column !important;
-					text-align: center !important;
-					padding: 1rem !important;
+					flex-direction: column;
+					text-align: center;
+					padding: 1rem;
 				}
 				.main-nav {
-					width: 100% !important;
-					justify-content: center !important;
-					flex-wrap: wrap !important;
-					margin-top: 0.5rem !important;
+					width: 100%;
+					justify-content: center;
+					flex-wrap: wrap;
+					margin-top: 0.5rem;
 				}
 				.hero {
-					padding: 3.5rem 1.25rem !important;
+					padding: 3.5rem 1.25rem;
 				}
 				.features {
-					padding: 3rem 1.25rem !important;
+					padding: 3rem 1.25rem;
 				}
 			}
 		</style>
