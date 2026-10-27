@@ -1,12 +1,10 @@
 <script>
-  // Login action — update with your actual route
   const handleLogin = () => {
     window.location.href = '/login';
   };
 </script>
 
 <style>
-  /* Base Reset & Variables */
   * {
     margin: 0;
     padding: 0;
@@ -14,111 +12,126 @@
   }
 
   :root {
-    --primary: #0d9488;
-    --primary-dark: #0f766e;
+    --primary: #06b69f; /* matches your brand teal */
+    --primary-dark: #0d9488;
     --accent: #f97316;
-    --accent-hover: #ea580c;
     --light: #f0fdfa;
-    --dark: #1e293b;
+    --dark: #0f172a;
     --muted: #64748b;
     --white: #ffffff;
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-    --shadow-md: 0 6px 20px rgba(13, 148, 136, 0.12);
-    --shadow-lg: 0 12px 40px rgba(13, 148, 136, 0.18);
+    --shadow-md: 0 6px 20px rgba(6, 182, 159, 0.15);
+    --shadow-lg: 0 12px 40px rgba(6, 182, 159, 0.2);
     --radius: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   body {
-    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-family: 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: var(--dark);
   }
 
-  /* Navigation */
-  nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 1.5rem 2rem;
+  /* Header & Navigation */
+  header {
+    padding: 1rem 2rem;
     display: flex;
-    justify-content: flex-end;
-    z-index: 10;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white);
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  nav a {
+    margin: 0 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  nav a:hover {
+    color: var(--primary);
+  }
+
+  .nav-cta {
+    background: var(--primary);
+    color: white !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 999px;
+  }
+
+  .nav-cta:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
   }
 
   .login-btn {
-    background: transparent;
-    color: var(--primary-dark);
     border: 2px solid var(--primary);
-    padding: 0.7rem 1.8rem;
+    color: var(--primary-dark);
+    background: transparent;
+    padding: 0.6rem 1.5rem;
     border-radius: var(--radius);
     font-weight: 600;
-    font-size: 1rem;
     cursor: pointer;
     transition: var(--transition);
   }
 
   .login-btn:hover {
     background: var(--primary);
-    color: var(--white);
+    color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
 
   /* Hero Section */
   .hero {
-    background: linear-gradient(135deg, var(--light) 0%, #ccfbf1 100%);
-    padding: 8rem 1.5rem 6rem;
+    background: linear-gradient(135deg, #2dd4bf 0%, var(--primary-dark) 100%);
+    padding: 6rem 1.5rem;
     text-align: center;
-    overflow: hidden;
-  }
-
-  .hero-inner {
-    max-width: 800px;
-    margin: 0 auto;
+    color: white;
     animation: fadeInUp 0.8s ease-out;
   }
 
   .hero h1 {
-    font-size: clamp(2.5rem, 5vw, 3.8rem);
-    color: var(--primary-dark);
-    margin-bottom: 1.2rem;
-    line-height: 1.2;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
   }
 
   .hero p {
-    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-    color: var(--muted);
-    margin-bottom: 2.5rem;
+    font-size: 1.15rem;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
   }
 
   .hero-btn {
     display: inline-block;
-    background: var(--accent);
-    color: var(--white);
-    padding: 1rem 2.6rem;
-    border-radius: var(--radius);
+    background: white;
+    color: var(--primary-dark);
+    padding: 0.9rem 2.4rem;
+    border-radius: 999px;
     font-weight: 600;
-    font-size: 1.05rem;
     text-decoration: none;
     transition: var(--transition);
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
   .hero-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
-    background: var(--accent-hover);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   }
 
   /* Features Section */
   .features {
-    padding: 5rem 1.5rem;
-    background: var(--white);
+    padding: 4.5rem 1.5rem;
+    background: white;
   }
 
   .container {
@@ -129,19 +142,8 @@
   .features h2 {
     text-align: center;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: var(--primary-dark);
-    margin-bottom: 3.5rem;
-    position: relative;
-  }
-
-  .features h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: var(--accent);
-    margin: 0.8rem auto 0;
-    border-radius: 2px;
+    margin-bottom: 3rem;
+    color: var(--dark);
   }
 
   .grid {
@@ -151,11 +153,9 @@
   }
 
   .card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
+    background: var(--light);
+    padding: 2.2rem 1.8rem;
     border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    border-top: 4px solid var(--primary);
     transition: var(--transition);
     opacity: 0;
     animation: fadeInUp 0.6s ease-out forwards;
@@ -166,26 +166,36 @@
   .card:nth-child(3) { animation-delay: 0.3s; }
 
   .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
   }
 
   .card h3 {
-    font-size: 1.3rem;
-    color: var(--primary-dark);
-    margin-bottom: 1rem;
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
   }
 
   .card p {
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--dark);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
   }
 
   /* Animations */
   @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(25px);
     }
     to {
       opacity: 1;
@@ -193,38 +203,47 @@
     }
   }
 
-  /* Responsive */
+  /* Mobile */
   @media (max-width: 768px) {
-    nav {
-      padding: 1.2rem 1.5rem;
+    header {
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
     }
-    .login-btn {
-      padding: 0.6rem 1.5rem;
+    nav {
+      order: 3;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    nav a {
+      margin: 0 0.5rem;
     }
     .hero {
-      padding: 7rem 1.25rem 4.5rem;
+      padding: 4rem 1.25rem;
     }
     .features {
-      padding: 3.5rem 1.25rem;
-    }
-    .card {
-      padding: 2rem 1.5rem;
+      padding: 3rem 1.25rem;
     }
   }
 </style>
 
-<!-- Navigation with Login -->
-<nav>
+<!-- Header / Navigation -->
+<header>
+  <a href="/" class="logo">Maxi-Mize Health Solutions</a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Our Services</a>
+    <a href="/about">About Us</a>
+    <a href="/contact" class="nav-cta">Get In Touch</a>
+  </nav>
   <button class="login-btn" on:click={handleLogin}>Log In</button>
-</nav>
+</header>
 
 <!-- Hero Section -->
 <section class="hero">
-  <div class="hero-inner">
-    <h1>Your Health, Our Priority</h1>
-    <p>Providing compassionate care and wellness solutions to help you live your best life.</p>
-    <a href="/contact" class="hero-btn">Get In Touch</a>
-  </div>
+  <h1>Your Health, Our Priority</h1>
+  <p>Providing compassionate care and wellness solutions to help you live your best life.</p>
+  <a href="/contact" class="hero-btn">Get In Touch</a>
 </section>
 
 <!-- Features Section -->
@@ -247,3 +266,8 @@
     </div>
   </div>
 </section>
+
+<!-- Footer -->
+<footer>
+  © 2026 Maxi-Mize Health Solutions — Your Health, Your Dignity, Our Care
+</footer>
