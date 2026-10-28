@@ -2,7 +2,7 @@
   <title>Login — Maximise Health Solutions</title>
   <meta name="description" content="Sign in to your account" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
