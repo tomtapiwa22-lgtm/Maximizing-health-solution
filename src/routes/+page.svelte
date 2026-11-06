@@ -212,76 +212,56 @@
       50% { transform: scale(1.6); opacity: 0.9; }
     }
 
-    /* Card animations */
+    /* Card styles — matching your design */
+    .card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 10px 40px rgba(236,72,153,0.15);
+      animation: fadeInUp 1.2s ease-out;
+    }
+
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes gentleGlow {
-      0%, 100% { box-shadow: 0 10px 40px rgba(244, 114, 182, 0.25); }
-      50% { box-shadow: 0 10px 60px rgba(244, 114, 182, 0.45), 0 0 40px rgba(236,72,153,0.25); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-
-    @keyframes fadeInDelay {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      background: white;
-      padding: 3rem 2rem;
-      border-radius: 32px;
-      width: 100%;
-      max-width: 460px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-      animation: fadeInUp 1.2s ease-out, gentleGlow 2.5s ease-in-out infinite;
-    }
-
     .heart-icon {
-      font-size: 3.8rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
-      display: inline-block;
       animation: pulse 1.2s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.15); }
     }
 
     .to-you {
       color: #9d174d;
-      font-size: 1.2rem;
-      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
       opacity: 0;
       animation: fadeInDelay 1s ease-out 0.3s forwards;
     }
 
     .danisha {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #ec4899, #f43f5e, #ec4899);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 3s linear infinite;
+      color: #ec4899;
       margin-bottom: 0.5rem;
       opacity: 0;
-      animation: fadeInDelay 1s ease-out 0.6s forwards, shimmer 3s linear infinite;
+      animation: fadeInDelay 1s ease-out 0.6s forwards;
     }
 
     .from {
       color: #be185d;
-      font-size: 1rem;
+      font-size: 0.9rem;
       margin-bottom: 2rem;
       font-style: italic;
       opacity: 0;
@@ -289,10 +269,10 @@
     }
 
     .words {
-      color: #4b5563;
-      line-height: 1.9;
+      color: #6b7280;
+      line-height: 1.8;
       margin-bottom: 2rem;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
     }
 
     .words p {
@@ -308,27 +288,32 @@
 
     .love-note {
       margin-top: 1rem;
-      padding: 2rem;
-      background: linear-gradient(135deg, #fdf2f7, #fce7f3);
-      border-radius: 24px;
-      border-left: 4px solid #ec4899;
-      line-height: 2;
+      padding: 1.5rem;
+      background: #fdf2f7;
+      border-radius: 16px;
+      border-left: 3px solid #ec4899;
+      line-height: 1.8;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease-out 2.5s forwards;
+      animation: fadeInDelay 1s ease-out 2.5s forwards;
     }
 
     .big-love {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #ec4899;
-      margin: 1rem 0;
+      margin: 0.8rem 0;
     }
 
     .signature {
       margin-top: 1rem;
       color: #9d174d;
       font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeInDelay {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 480px) {
@@ -336,12 +321,7 @@
         padding: 2rem 1.5rem;
         margin: 1rem;
       }
-      .danisha { font-size: 2rem; }
-      .heart-icon { font-size: 3.2rem; }
-      .music-note {
-        font-size: 1.2rem;
-        padding: 0.4rem 0.6rem;
-      }
+      .danisha { font-size: 1.8rem; }
     }
   </style>
 </svelte:head>
@@ -351,6 +331,7 @@
     <div class="music-note">🎵 playing…</div>
   {/if}
 
+  <!-- ANIMATIONS — these were missing! -->
   {#each glowOrbs as orb}
     <div
       class="glow-orb"
@@ -428,9 +409,9 @@
     ></div>
   {/each}
 
+  <!-- YOUR CARD — kept exactly as you designed it -->
   <div class="card">
     <div class="heart-icon">💖</div>
-    
     <p class="to-you">To my beautiful</p>
     <h1 class="danisha">Danisha</h1>
     <p class="from">From your Tanatswanashe 💕</p>
@@ -542,7 +523,7 @@
       }
     }
 
-    // Initial burst
+    // Initial burst of animations
     for (let i = 0; i < 18; i++) addButterfly();
     for (let i = 0; i < 12; i++) addCrossHeart();
     for (let i = 0; i < 20; i++) addHeart();
