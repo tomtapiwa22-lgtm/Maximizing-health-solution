@@ -212,7 +212,58 @@
       50% { transform: scale(1.6); opacity: 0.9; }
     }
 
-    /* Card styles — matching your design */
+    /* Image styles — super amazing */
+    .photo-frame {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid white;
+      box-shadow: 0 0 20px rgba(236,72,153,0.3), 0 5px 20px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: scale(0.8) rotate(-5deg);
+      animation: photoPop 0.8s ease-out forwards;
+      position: relative;
+    }
+
+    .photo-frame:nth-child(1) {
+      animation-delay: 0.4s;
+      float: left;
+      margin: 0 0 1rem 0;
+    }
+
+    .photo-frame:nth-child(2) {
+      animation-delay: 0.7s;
+      float: right;
+      margin: 0 0 1rem 1rem;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 3s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.1);
+    }
+
+    @keyframes photoPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+      }
+      60% {
+        transform: scale(1.05) rotate(2deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    /* Card */
     .card {
       background: white;
       padding: 2.5rem 2rem;
@@ -273,6 +324,7 @@
       line-height: 1.8;
       margin-bottom: 2rem;
       font-size: 0.95rem;
+      clear: both;
     }
 
     .words p {
@@ -295,6 +347,7 @@
       line-height: 1.8;
       opacity: 0;
       animation: fadeInDelay 1s ease-out 2.5s forwards;
+      clear: both;
     }
 
     .big-love {
@@ -322,6 +375,10 @@
         margin: 1rem;
       }
       .danisha { font-size: 1.8rem; }
+      .photo-frame {
+        width: 110px;
+        height: 110px;
+      }
     }
   </style>
 </svelte:head>
@@ -331,7 +388,7 @@
     <div class="music-note">🎵 playing…</div>
   {/if}
 
-  <!-- ANIMATIONS — these were missing! -->
+  <!-- Background animations -->
   {#each glowOrbs as orb}
     <div
       class="glow-orb"
@@ -409,9 +466,18 @@
     ></div>
   {/each}
 
-  <!-- YOUR CARD — kept exactly as you designed it -->
+  <!-- Main card -->
   <div class="card">
     <div class="heart-icon">💖</div>
+
+    <!-- ✨ YOUR 2 IMAGES HERE ✨ -->
+    <div class="photo-frame">
+      <img src="/photo1.jpg" alt="Photo 1" loading="lazy" />
+    </div>
+    <div class="photo-frame">
+      <img src="/photo2.jpg" alt="Photo 2" loading="lazy" />
+    </div>
+
     <p class="to-you">To my beautiful</p>
     <h1 class="danisha">Danisha</h1>
     <p class="from">From your Tanatswanashe 💕</p>
@@ -523,7 +589,7 @@
       }
     }
 
-    // Initial burst of animations
+    // Initial burst
     for (let i = 0; i < 18; i++) addButterfly();
     for (let i = 0; i < 12; i++) addCrossHeart();
     for (let i = 0; i < 20; i++) addHeart();
@@ -547,7 +613,6 @@
     const sInterval = setInterval(() => {
       if (sparkles.length < 50) addSparkle();
     }, 600);
-
     const cInterval = setInterval(() => {
       if (confetti.length < 30) addConfetti();
     }, 900);
@@ -570,3 +635,4 @@
     };
   });
 </script>
+
