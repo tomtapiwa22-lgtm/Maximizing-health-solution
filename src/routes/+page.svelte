@@ -25,7 +25,7 @@
       position: relative;
     }
 
-    /* === BUTTERFLY HEARTS === */
+    /* Butterfly-shaped hearts */
     .butterfly-heart {
       position: absolute;
       pointer-events: none;
@@ -74,19 +74,11 @@
     }
 
     @keyframes flyButterfly {
-      0% {
-        transform: translateY(100vh) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
-      50% {
-        transform: translateY(50vh) translateX(30px) rotate(5deg);
-      }
+      50% { transform: translateY(50vh) translateX(30px) rotate(5deg); }
       80% { opacity: 0.9; }
-      100% {
-        transform: translateY(-10vh) translateX(-20px) rotate(-5deg);
-        opacity: 0;
-      }
+      100% { transform: translateY(-10vh) translateX(-20px) rotate(-5deg); opacity: 0; }
     }
 
     @keyframes flutterWings {
@@ -94,7 +86,7 @@
       100% { transform: scaleX(0.85); }
     }
 
-    /* === Floating hearts === */
+    /* Floating hearts */
     .heart {
       position: absolute;
       color: #f472b6;
@@ -105,19 +97,13 @@
     }
 
     @keyframes rise {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
       15% { opacity: 0.8; }
       85% { opacity: 0.8; }
-      100% {
-        transform: translateY(-10vh) rotate(360deg);
-        opacity: 0;
-      }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    /* === Sparkles === */
+    /* Sparkles */
     .sparkle {
       position: absolute;
       width: 6px;
@@ -135,21 +121,15 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* === Card animations === */
+    /* Card animations */
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.15); }
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes gentleGlow {
@@ -299,9 +279,9 @@
 </svelte:head>
 
 <div class="container">
-  {musicReady && (
+  {#if musicReady}
     <div class="music-note">🎵 playing…</div>
-  )}
+  {/if}
 
   {#each butterflies as b}
     <div
@@ -375,8 +355,8 @@
   let musicReady = false;
   let audio = null;
 
-  // ✅ YOUR SONG — put the file in your /public folder
-  const SONG_URL = '/reason-to-live.mp3';
+  // ✅ Your song file — make sure it's in /static folder
+  const SONG_URL = '/WhatsApp Audio 2026-11-06 at 18.25.51.mpeg';
 
   function addButterfly() {
     butterflies = [...butterflies, {
@@ -404,6 +384,7 @@
   }
 
   onMount(() => {
+    // Start music
     if (typeof window !== 'undefined') {
       audio = new Audio(SONG_URL);
       audio.loop = true;
@@ -416,7 +397,7 @@
             musicReady = true;
           })
           .catch(() => {
-            // Auto-blocked — play on first interaction
+            // Browser blocked autoplay — start on first click/tap
             const enableAudio = () => {
               if (audio) {
                 audio.play();
@@ -431,10 +412,12 @@
       }
     }
 
+    // Initial animations
     for (let i = 0; i < 10; i++) addButterfly();
     for (let i = 0; i < 15; i++) addHeart();
     for (let i = 0; i < 25; i++) addSparkle();
 
+    // Keep adding gently forever
     const bInterval = setInterval(() => {
       if (butterflies.length < 25) addButterfly();
     }, 2000);
