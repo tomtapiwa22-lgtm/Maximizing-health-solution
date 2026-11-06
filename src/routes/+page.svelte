@@ -8,7 +8,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-
+  
     body {
       min-height: 100vh;
       background: radial-gradient(circle at top left, #ffe4ec 0%, #fce7f3 30%, #fbcfe8 60%, #f9a8d4 100%);
