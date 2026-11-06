@@ -11,7 +11,7 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(180deg, #fef2f7 0%, #fce7f3 50%, #fbcfe8 100%);
+      background: radial-gradient(circle at top left, #ffe4ec 0%, #fce7f3 30%, #fbcfe8 60%, #f9a8d4 100%);
       font-family: 'Segoe UI', sans-serif;
       overflow-x: hidden;
     }
@@ -25,108 +25,194 @@
       position: relative;
     }
 
-    /* Butterfly-shaped hearts */
-    .butterfly-heart {
+    /* Music note */
+    .music-note {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      z-index: 100;
+      animation: bounce 1s ease-in-out infinite;
+      color: #ec4899;
+      background: rgba(255,255,255,0.9);
+      padding: 0.5rem 0.8rem;
+      border-radius: 50px;
+      box-shadow: 0 2px 10px rgba(236,72,153,0.2);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Butterfly — zig-zag flight */
+    .butterfly {
       position: absolute;
       pointer-events: none;
-      z-index: 1;
-      animation: flyButterfly 10s ease-in-out infinite;
+      z-index: 2;
+      animation: zigZagFly 12s ease-in-out infinite;
     }
 
-    .bh-shape {
+    .b-shape {
       position: relative;
-      width: 24px;
-      height: 22px;
+      width: 28px;
+      height: 26px;
       transform-origin: center;
-      animation: flutterWings 0.6s ease-in-out infinite alternate;
+      animation: flutter 0.5s ease-in-out infinite alternate;
     }
 
-    .bh-wing {
+    .b-wing {
       position: absolute;
-      width: 12px;
-      height: 18px;
+      width: 14px;
+      height: 22px;
       border-radius: 50% 50% 0 0;
       background: linear-gradient(135deg, #ec4899, #f43f5e);
-      box-shadow: 0 0 6px rgba(236,72,153,0.4);
+      box-shadow: 0 0 8px rgba(236,72,153,0.5);
     }
 
-    .bh-wing.left {
+    .b-wing.left {
       left: 0;
       transform: rotate(-45deg);
       transform-origin: bottom right;
     }
 
-    .bh-wing.right {
+    .b-wing.right {
       right: 0;
       transform: rotate(45deg);
       transform-origin: bottom left;
     }
 
-    .bh-center {
+    .b-center {
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 8px;
-      height: 10px;
+      width: 10px;
+      height: 12px;
       background: linear-gradient(135deg, #ec4899, #f43f5e);
       border-radius: 50%;
     }
 
-    @keyframes flyButterfly {
-      0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+    @keyframes zigZagFly {
+      0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
       10% { opacity: 1; }
-      50% { transform: translateY(50vh) translateX(30px) rotate(5deg); }
-      80% { opacity: 0.9; }
-      100% { transform: translateY(-10vh) translateX(-20px) rotate(-5deg); opacity: 0; }
+      25% { transform: translateY(70vh) translateX(40px) rotate(10deg); }
+      40% { transform: translateY(50vh) translateX(-50px) rotate(-8deg); }
+      55% { transform: translateY(30vh) translateX(60px) rotate(12deg); }
+      70% { transform: translateY(10vh) translateX(-40px) rotate(-5deg); }
+      85% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh) translateX(20px) rotate(0deg);
+        opacity: 0;
+      }
     }
 
-    @keyframes flutterWings {
-      0% { transform: scaleX(1); }
-      100% { transform: scaleX(0.85); }
+    @keyframes flutter {
+      0% { transform: scaleX(1) rotateY(0deg); }
+      100% { transform: scaleX(0.75) rotateY(180deg); }
+    }
+
+    /* Crossing hearts */
+    .cross-heart {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      font-size: 1.5rem;
+      animation: crossFly 8s ease-in-out infinite;
+    }
+
+    @keyframes crossFly {
+      0% {
+        transform: translateY(100vh) translateX(-30px) rotate(0deg);
+        opacity: 0;
+      }
+      20% { opacity: 1; }
+      50% { transform: translateY(45vh) translateX(30px) rotate(180deg); }
+      80% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh) translateX(-20px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     /* Floating hearts */
     .heart {
       position: absolute;
       color: #f472b6;
-      animation: rise 7s ease-in-out infinite;
+      animation: rise 6s ease-in-out infinite;
       pointer-events: none;
       z-index: 1;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     @keyframes rise {
       0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      15% { opacity: 0.8; }
-      85% { opacity: 0.8; }
+      15% { opacity: 0.9; }
+      85% { opacity: 0.9; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
     /* Sparkles */
     .sparkle {
       position: absolute;
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
       background: white;
       border-radius: 50%;
-      box-shadow: 0 0 8px #fff, 0 0 12px #f472b6;
-      animation: sparkle 4s ease-in-out infinite;
+      box-shadow: 0 0 10px #fff, 0 0 18px #f472b6;
+      animation: sparkle 3s ease-in-out infinite;
       pointer-events: none;
       z-index: 1;
     }
 
     @keyframes sparkle {
       0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.2); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 16px;
+      background: linear-gradient(135deg, #ec4899, #f43f5e, #f9a8d4);
+      animation: confettiFall 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      50% { transform: translateY(50vh) translateX(30px) rotate(180deg); }
+      100% {
+        transform: translateY(100vh) translateX(-20px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Glow orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,72,153,0.35), transparent 70%);
+      animation: orbPulse 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.6); opacity: 0.9; }
     }
 
     /* Card animations */
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -134,7 +220,7 @@
 
     @keyframes gentleGlow {
       0%, 100% { box-shadow: 0 10px 40px rgba(244, 114, 182, 0.25); }
-      50% { box-shadow: 0 10px 50px rgba(244, 114, 182, 0.4), 0 0 30px rgba(236,72,153,0.2); }
+      50% { box-shadow: 0 10px 60px rgba(244, 114, 182, 0.45), 0 0 40px rgba(236,72,153,0.25); }
     }
 
     @keyframes shimmer {
@@ -152,40 +238,45 @@
       padding: 3rem 2rem;
       border-radius: 32px;
       width: 100%;
-      max-width: 440px;
+      max-width: 460px;
       text-align: center;
       position: relative;
       z-index: 10;
-      animation: fadeInUp 1.2s ease-out, gentleGlow 3s ease-in-out infinite;
+      animation: fadeInUp 1.2s ease-out, gentleGlow 2.5s ease-in-out infinite;
     }
 
     .heart-icon {
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       margin-bottom: 1rem;
       display: inline-block;
       animation: pulse 1.2s ease-in-out infinite;
     }
 
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
     .to-you {
       color: #9d174d;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       margin-bottom: 0.3rem;
       opacity: 0;
       animation: fadeInDelay 1s ease-out 0.3s forwards;
     }
 
     .danisha {
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       font-weight: 700;
       background: linear-gradient(90deg, #ec4899, #f43f5e, #ec4899);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 3.5s linear infinite;
+      animation: shimmer 3s linear infinite;
       margin-bottom: 0.5rem;
       opacity: 0;
-      animation: fadeInDelay 1s ease-out 0.6s forwards, shimmer 3.5s linear infinite;
+      animation: fadeInDelay 1s ease-out 0.6s forwards, shimmer 3s linear infinite;
     }
 
     .from {
@@ -228,7 +319,7 @@
     }
 
     .big-love {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: #ec4899;
       margin: 1rem 0;
@@ -240,36 +331,13 @@
       font-style: italic;
     }
 
-    .music-note {
-      position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 1.5rem;
-      z-index: 100;
-      animation: bounce 1s ease-in-out infinite;
-      color: #ec4899;
-      background: rgba(255,255,255,0.8);
-      padding: 0.5rem 0.8rem;
-      border-radius: 50px;
-      box-shadow: 0 2px 10px rgba(236,72,153,0.2);
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
     @media (max-width: 480px) {
       .card {
         padding: 2rem 1.5rem;
         margin: 1rem;
       }
-      .danisha {
-        font-size: 1.9rem;
-      }
-      .heart-icon {
-        font-size: 3rem;
-      }
+      .danisha { font-size: 2rem; }
+      .heart-icon { font-size: 3.2rem; }
       .music-note {
         font-size: 1.2rem;
         padding: 0.4rem 0.6rem;
@@ -283,9 +351,22 @@
     <div class="music-note">🎵 playing…</div>
   {/if}
 
+  {#each glowOrbs as orb}
+    <div
+      class="glow-orb"
+      style="
+        left: {orb.x}%;
+        top: {orb.y}%;
+        animation-delay: {orb.delay}s;
+        width: {orb.size}px;
+        height: {orb.size}px;
+      "
+    ></div>
+  {/each}
+
   {#each butterflies as b}
     <div
-      class="butterfly-heart"
+      class="butterfly"
       style="
         left: {b.x}%;
         animation-delay: {b.delay}s;
@@ -293,12 +374,24 @@
         transform: scale({b.scale});
       "
     >
-      <div class="bh-shape">
-        <div class="bh-wing left"></div>
-        <div class="bh-wing right"></div>
-        <div class="bh-center"></div>
+      <div class="b-shape">
+        <div class="b-wing left"></div>
+        <div class="b-wing right"></div>
+        <div class="b-center"></div>
       </div>
     </div>
+  {/each}
+
+  {#each crossHearts as h}
+    <span
+      class="cross-heart"
+      style="
+        left: {h.x}%;
+        animation-delay: {h.delay}s;
+        animation-duration: {h.dur}s;
+        font-size: {h.size}rem;
+      "
+    >💖</span>
   {/each}
 
   {#each hearts as h}
@@ -319,6 +412,18 @@
         left: {s.x}%;
         top: {s.y}%;
         animation-delay: {s.delay}s;
+      "
+    ></div>
+  {/each}
+
+  {#each confetti as c}
+    <div
+      class="confetti"
+      style="
+        left: {c.x}%;
+        animation-delay: {c.delay}s;
+        animation-duration: {c.dur}s;
+        transform: rotate({c.rotate}deg);
       "
     ></div>
   {/each}
@@ -350,28 +455,39 @@
   import { onMount, onDestroy } from 'svelte';
 
   let butterflies = [];
+  let crossHearts = [];
   let hearts = [];
   let sparkles = [];
+  let confetti = [];
+  let glowOrbs = [];
   let musicReady = false;
   let audio = null;
 
-  // ✅ Your song file — make sure it's in /static folder
   const SONG_URL = '/WhatsApp Audio 2026-11-06 at 18.25.51.mpeg';
 
   function addButterfly() {
     butterflies = [...butterflies, {
       x: 5 + Math.random() * 90,
-      delay: Math.random() * 8,
-      dur: 7 + Math.random() * 5,
-      scale: 0.7 + Math.random() * 0.6
+      delay: Math.random() * 10,
+      dur: 6 + Math.random() * 6,
+      scale: 0.6 + Math.random() * 0.8
+    }];
+  }
+
+  function addCrossHeart() {
+    crossHearts = [...crossHearts, {
+      x: 5 + Math.random() * 90,
+      delay: Math.random() * 7,
+      dur: 5 + Math.random() * 4,
+      size: 1.2 + Math.random() * 0.8
     }];
   }
 
   function addHeart() {
     hearts = [...hearts, {
       x: 5 + Math.random() * 90,
-      delay: Math.random() * 6,
-      dur: 5 + Math.random() * 4
+      delay: Math.random() * 5,
+      dur: 4 + Math.random() * 4
     }];
   }
 
@@ -379,12 +495,29 @@
     sparkles = [...sparkles, {
       x: Math.random() * 100,
       y: Math.random() * 100,
-      delay: Math.random() * 4
+      delay: Math.random() * 3
+    }];
+  }
+
+  function addConfetti() {
+    confetti = [...confetti, {
+      x: Math.random() * 100,
+      delay: Math.random() * 6,
+      dur: 4 + Math.random() * 3,
+      rotate: Math.random() * 360
+    }];
+  }
+
+  function addGlowOrb() {
+    glowOrbs = [...glowOrbs, {
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 4,
+      size: 40 + Math.random() * 50
     }];
   }
 
   onMount(() => {
-    // Start music
     if (typeof window !== 'undefined') {
       audio = new Audio(SONG_URL);
       audio.loop = true;
@@ -393,11 +526,8 @@
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
-          .then(() => {
-            musicReady = true;
-          })
+          .then(() => { musicReady = true; })
           .catch(() => {
-            // Browser blocked autoplay — start on first click/tap
             const enableAudio = () => {
               if (audio) {
                 audio.play();
@@ -412,28 +542,46 @@
       }
     }
 
-    // Initial animations
-    for (let i = 0; i < 10; i++) addButterfly();
-    for (let i = 0; i < 15; i++) addHeart();
-    for (let i = 0; i < 25; i++) addSparkle();
+    // Initial burst
+    for (let i = 0; i < 18; i++) addButterfly();
+    for (let i = 0; i < 12; i++) addCrossHeart();
+    for (let i = 0; i < 20; i++) addHeart();
+    for (let i = 0; i < 30; i++) addSparkle();
+    for (let i = 0; i < 15; i++) addConfetti();
+    for (let i = 0; i < 8; i++) addGlowOrb();
 
-    // Keep adding gently forever
+    // Keep adding continuously
     const bInterval = setInterval(() => {
-      if (butterflies.length < 25) addButterfly();
-    }, 2000);
+      if (butterflies.length < 35) addButterfly();
+    }, 1200);
+
+    const chInterval = setInterval(() => {
+      if (crossHearts.length < 25) addCrossHeart();
+    }, 1000);
 
     const hInterval = setInterval(() => {
-      if (hearts.length < 35) addHeart();
-    }, 1500);
+      if (hearts.length < 40) addHeart();
+    }, 800);
 
     const sInterval = setInterval(() => {
-      if (sparkles.length < 40) addSparkle();
-    }, 1000);
+      if (sparkles.length < 50) addSparkle();
+    }, 600);
+
+    const cInterval = setInterval(() => {
+      if (confetti.length < 30) addConfetti();
+    }, 900);
+
+    const gInterval = setInterval(() => {
+      if (glowOrbs.length < 15) addGlowOrb();
+    }, 1500);
 
     return () => {
       clearInterval(bInterval);
+      clearInterval(chInterval);
       clearInterval(hInterval);
       clearInterval(sInterval);
+      clearInterval(cInterval);
+      clearInterval(gInterval);
       if (audio) {
         audio.pause();
         audio = null;
