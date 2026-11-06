@@ -1,204 +1,279 @@
 <svelte:head>
-  <title>Login — Maximise Health Solutions</title>
-  <meta name="description" content="Sign in to your account" />
+  <title>For Danisha 💖</title>
+  <meta name="description" content="Made with love by Tanatswanashe" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; }
+    body { margin: 0; overflow-x: hidden; min-height: 100vh; }
     a { text-decoration: none; color: inherit; }
     button { font-family: inherit; }
 
     :root {
-      --primary: #10B981;
-      --secondary: #059669;
-      --accent: #F59E0B;
-      --light: #ECFDF5;
-      --dark: #1F2937;
-      --muted: #6B7280;
-      --border: #E5E7EB;
+      --love-pink: #EC4899;
+      --love-rose: #F43F5E;
+      --love-light: #FDF2F8;
+      --love-deep: #9D174D;
+      --love-glow: rgba(236, 72, 153, 0.4);
       --white: #FFFFFF;
-      --radius: 14px;
+      --radius: 24px;
     }
 
-    .login-page {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-      min-height: 100vh !important;
-      background: linear-gradient(180deg, #ECFDF5 0%, #FFFFFF 100%) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      padding: 2rem 1rem !important;
+    .love-page {
+      font-family: 'Segoe UI', cursive, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #FDF2F8 0%, #FCE7F3 50%, #FBCFE8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .login-card {
-      background: var(--white) !important;
-      padding: 2.5rem !important;
-      border-radius: var(--radius) !important;
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15) !important;
-      width: 100% !important;
-      max-width: 420px !important;
+    /* Floating hearts background */
+    .heart {
+      position: absolute;
+      color: var(--love-pink);
+      opacity: 0.6;
+      animation: float 6s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .login-card h1 {
-      text-align: center !important;
-      color: var(--secondary) !important;
-      margin-bottom: 0.5rem !important;
-      font-size: 1.75rem !important;
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    .subtext {
-      text-align: center !important;
-      color: var(--muted) !important;
-      margin-bottom: 2rem !important;
+    @keyframes pulse-heart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
     }
 
-    .form-group {
-      margin-bottom: 1.25rem !important;
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 8px 32px var(--love-glow), 0 0 0 rgba(236,72,153,0); }
+      50% { box-shadow: 0 8px 32px var(--love-glow), 0 0 40px var(--love-glow); }
     }
 
-    .form-group label {
-      display: block !important;
-      margin-bottom: 0.5rem !important;
-      font-weight: 500 !important;
-      color: var(--dark) !important;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .form-group input,
-    .form-group select {
-      width: 100% !important;
-      padding: 0.85rem 1rem !important;
-      border: 2px solid var(--border) !important;
-      border-radius: 8px !important;
-      font-size: 1rem !important;
-      transition: border-color 0.2s ease !important;
-      background: var(--white) !important;
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
     }
 
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none !important;
-      border-color: var(--primary) !important;
-    }
-
-    .signin-btn {
-      width: 100% !important;
-      padding: 0.9rem !important;
-      background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-      color: var(--white) !important;
-      border: none !important;
-      border-radius: 8px !important;
-      font-size: 1rem !important;
-      font-weight: 600 !important;
-      cursor: pointer !important;
-      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-      margin-top: 0.5rem !important;
-    }
-
-    .signin-btn:hover {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25) !important;
-    }
-
-    .help-text {
-      margin-top: 1.5rem !important;
-      text-align: center !important;
-      color: var(--muted) !important;
-      font-size: 0.9rem !important;
-    }
-
-    .help-text a {
-      color: var(--primary) !important;
-      text-decoration: none !important;
-      font-weight: 500 !important;
-    }
-
-    .help-text a:hover {
-      text-decoration: underline !important;
-    }
-
-    .status {
-      margin-top: 1rem;
+    .love-card {
+      background: var(--white);
+      padding: 3rem 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px var(--love-glow);
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      z-index: 10;
+      animation: fadeUp 1s ease-out, glow 3s ease-in-out infinite;
       text-align: center;
-      font-size: 0.9rem;
     }
-    .error { color: #EF4444; }
-    .success { color: #10B981; }
+
+    .main-heart {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      animation: pulse-heart 1.2s ease-in-out infinite;
+    }
+
+    .names {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--love-deep);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .danisha-name {
+      background: linear-gradient(90deg, var(--love-rose), var(--love-pink), var(--love-rose));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+      font-size: 2.2rem;
+    }
+
+    .from-text {
+      font-size: 1rem;
+      color: var(--love-rose);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .message {
+      color: #4B5563;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .message p {
+      margin-bottom: 0.8rem;
+    }
+
+    .surprise-btn {
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--love-rose), var(--love-pink));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    }
+
+    .surprise-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
+    }
+
+    .surprise-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .secret-message {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #FDF2F8, #FCE7F3);
+      border-radius: 16px;
+      border-left: 4px solid var(--love-rose);
+      animation: fadeUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .secret-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .secret-text {
+      color: var(--love-deep);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .countdown {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--love-rose);
+      font-weight: 500;
+    }
 
     @media (max-width: 480px) {
-      .login-card {
-        padding: 2rem 1.5rem !important;
+      .love-card {
+        padding: 2rem 1.5rem;
+      }
+      .names {
+        font-size: 1.5rem;
+      }
+      .danisha-name {
+        font-size: 1.8rem;
+      }
+      .main-heart {
+        font-size: 3rem;
       }
     }
   </style>
 </svelte:head>
 
-<div class="login-page">
-  <main class="login-card">
-    <h1>Welcome Back</h1>
-    <p class="subtext">Sign in to access your dashboard</p>
+<div class="love-page">
+  {#each hearts as heart, i}
+    <span 
+      class="heart" 
+      style="
+        left: {heart.x}%; 
+        animation-delay: {heart.delay}s; 
+        animation-duration: {heart.duration}s;
+        font-size: {heart.size}rem;
+      "
+    >
+      ❤️
+    </span>
+  {/each}
 
-    <form on:submit={handleLogin}>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" bind:value={email} placeholder="your@email.com" required />
+  <main class="love-card">
+    <div class="main-heart">💖</div>
+    
+    <h1 class="names">
+      To my beautiful<br>
+      <span class="danisha-name">Danisha</span>
+    </h1>
+    <p class="from-text">From your Tanatswanashe 💕</p>
+
+    <div class="message">
+      <p>You make every day brighter just by being you.</p>
+      <p>Your smile is my favourite sight,<br>your laugh is my favourite sound.</p>
+      <p>You are wonderful, amazing, and so loved 💗</p>
+    </div>
+
+    <button class="surprise-btn" on:click={showSecret}>
+      ✨ Click for a Surprise ✨
+    </button>
+
+    {#if revealed}
+      <div class="secret-message show">
+        <p class="secret-text">
+          💝 You are the most special person in my world.<br><br>
+          I didn't need a special day to tell you this —<br>
+          but I'll take every chance I get to say:<br><br>
+          <strong style="font-size:1.3rem; color:#EC4899;">I love you so much, Danisha</strong><br><br>
+          Forever yours,<br>
+          <em>Tanatswanashe</em> 💘
+        </p>
+        <p class="countdown">💕 Always and forever 💕</p>
       </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" bind:value={password} placeholder="••••••••" required />
-      </div>
-
-      <div class="form-group">
-        <label>I am signing in as</label>
-        <select bind:value={selectedRole}>
-          <option value="client">Client</option>
-          <option value="carer">Carer</option>
-          <option value="admin">Administrator</option>
-        </select>
-      </div>
-
-      <button type="submit" class="signin-btn" disabled={loading}>
-        {loading ? 'Signing in…' : 'Sign In'}
-      </button>
-
-      {#if status}
-        <p class="status {status.type}">{status.message}</p>
-      {/if}
-    </form>
-
-    <p class="help-text">Need help? <a href="/contact">Contact us</a></p>
+    {/if}
   </main>
 </div>
 
 <script>
-  let email = '';
-  let password = '';
-  let selectedRole = 'client';
-  let loading = false;
-  let status = null;
+  import { onMount } from 'svelte';
 
-  function handleLogin(e) {
-    // ✅ Explicitly prevent default form reload
-    e.preventDefault();
-    
-    loading = true;
-    status = null;
+  let revealed = false;
+  let hearts = [];
 
-    // Debug log — check browser console (F12) to confirm this runs
-    console.log('Login clicked → role:', selectedRole, '→ redirecting to:', `/dashboard/${selectedRole}`);
-
-    // Short delay so you see the loading state
-    setTimeout(() => {
-      status = { type: 'success', message: 'Redirecting…' };
-      
-      // ✅ Use SvelteKit's proper navigation (replaces window.location)
-      if (typeof window !== 'undefined') {
-        window.location.href = `/dashboard/${selectedRole}`;
-      }
-      
-      loading = false;
-    }, 300);
+  function showSecret() {
+    revealed = true;
+    // Generate extra hearts on click
+    for (let i = 0; i < 15; i++) {
+      addHeart();
+    }
   }
+
+  function addHeart() {
+    hearts = [
+      ...hearts,
+      {
+        x: Math.random() * 100,
+        delay: Math.random() * 5,
+        duration: 4 + Math.random() * 5,
+        size: 1 + Math.random() * 2,
+        id: Date.now() + Math.random()
+      }
+    ];
+  }
+
+  onMount(() => {
+    // Generate initial floating hearts
+    for (let i = 0; i < 20; i++) {
+      addHeart();
+    }
+  });
 </script>
