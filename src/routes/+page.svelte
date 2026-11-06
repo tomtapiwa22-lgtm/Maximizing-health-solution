@@ -25,7 +25,7 @@
       position: relative;
     }
 
-    /* Floating hearts */
+    /* Floating hearts — automatic & endless */
     .heart {
       position: absolute;
       color: #f472b6;
@@ -39,8 +39,8 @@
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
       }
-      15% { opacity: 0.7; }
-      85% { opacity: 0.7; }
+      15% { opacity: 0.75; }
+      85% { opacity: 0.75; }
       100% {
         transform: translateY(-10vh) rotate(360deg);
         opacity: 0;
@@ -49,13 +49,13 @@
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.15); }
     }
 
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
@@ -68,6 +68,16 @@
       50% { box-shadow: 0 10px 40px rgba(244, 114, 182, 0.35); }
     }
 
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes fadeInDelay {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     .card {
       background: white;
       padding: 3rem 2rem;
@@ -77,24 +87,36 @@
       text-align: center;
       position: relative;
       z-index: 10;
-      animation: fadeInUp 1s ease-out, gentleGlow 3s ease-in-out infinite;
+      animation: fadeInUp 1.2s ease-out, gentleGlow 3s ease-in-out infinite;
     }
 
     .heart-icon {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin-bottom: 1rem;
       display: inline-block;
       animation: pulse 1.2s ease-in-out infinite;
     }
 
+    .to-you {
+      color: #9d174d;
+      font-size: 1.15rem;
+      margin-bottom: 0.3rem;
+      opacity: 0;
+      animation: fadeInDelay 1s ease-out 0.3s forwards;
+    }
+
     .danisha {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #ec4899, #f43f5e);
+      background: linear-gradient(90deg, #ec4899, #f43f5e, #ec4899);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: shimmer 3.5s linear infinite;
       margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeInDelay 1s ease-out 0.6s forwards, shimmer 3.5s linear infinite;
     }
 
     .from {
@@ -102,58 +124,51 @@
       font-size: 1rem;
       margin-bottom: 2rem;
       font-style: italic;
+      opacity: 0;
+      animation: fadeInDelay 1s ease-out 0.9s forwards;
     }
 
     .words {
       color: #4b5563;
-      line-height: 1.8;
+      line-height: 1.9;
       margin-bottom: 2rem;
       font-size: 1rem;
     }
 
     .words p {
       margin-bottom: 0.5rem;
-    }
-
-    .btn {
-      padding: 0.9rem 2rem;
-      background: linear-gradient(135deg, #ec4899, #f43f5e);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
-    }
-
-    .hidden-message {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: #fdf2f7;
-      border-radius: 18px;
-      line-height: 1.8;
-      color: #831843;
       opacity: 0;
-      transform: translateY(15px);
-      transition: all 0.7s ease-out;
+      animation: fadeInDelay 1s ease-out forwards;
     }
 
-    .hidden-message.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .words p:nth-child(1) { animation-delay: 1.2s; }
+    .words p:nth-child(2) { animation-delay: 1.5s; }
+    .words p:nth-child(3) { animation-delay: 1.8s; }
+    .words p:nth-child(4) { animation-delay: 2.1s; }
+
+    .love-note {
+      margin-top: 1rem;
+      padding: 1.8rem;
+      background: linear-gradient(135deg, #fdf2f7, #fce7f3);
+      border-radius: 20px;
+      border-left: 4px solid #ec4899;
+      line-height: 1.9;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out 2.5s forwards;
     }
 
-    .love-text {
-      font-size: 1.2rem;
-      font-weight: 600;
+    .big-love {
+      font-size: 1.35rem;
+      font-weight: 700;
       color: #ec4899;
       margin: 0.8rem 0;
+    }
+
+    .signature {
+      margin-top: 1rem;
+      color: #9d174d;
+      font-style: italic;
     }
 
     @media (max-width: 480px) {
@@ -161,7 +176,10 @@
         padding: 2rem 1.5rem;
       }
       .danisha {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
+      }
+      .heart-icon {
+        font-size: 2.8rem;
       }
     }
   </style>
@@ -182,7 +200,8 @@
 
   <div class="card">
     <div class="heart-icon">💖</div>
-    <p style="color: #831843; font-size: 1.1rem;">To my beautiful</p>
+    
+    <p class="to-you">To my beautiful</p>
     <h1 class="danisha">Danisha</h1>
     <p class="from">From your Tanatswanashe 💕</p>
 
@@ -193,44 +212,38 @@
       <p>You are wonderful, amazing, and so loved.</p>
     </div>
 
-    <button class="btn" on:click={reveal}>
-      {revealed ? '💖 Forever Yours 💖' : '✨ Click for a Surprise ✨'}
-    </button>
-
-    {#if revealed}
-      <div class="hidden-message visible">
-        <p>You are the most special person in my world.</p>
-        <p class="love-text">I love you so much, Danisha</p>
-        <p>Always and forever 💘</p>
-        <p style="margin-top: 0.5rem; font-style: italic;">— Tanatswanashe</p>
-      </div>
-    {/if}
+    <div class="love-note">
+      <p>You are the most special person in my world.</p>
+      <p class="big-love">I love you so much, Danisha</p>
+      <p>Always and forever 💘</p>
+      <p class="signature">— Tanatswanashe</p>
+    </div>
   </div>
 </div>
 
 <script>
   import { onMount } from 'svelte';
 
-  let revealed = false;
   let hearts = [];
-
-  function reveal() {
-    revealed = true;
-    // Extra hearts burst on click
-    for (let i = 0; i < 20; i++) addHeart();
-  }
 
   function addHeart() {
     hearts = [...hearts, {
       x: 5 + Math.random() * 90,
-      delay: Math.random() * 5,
+      delay: Math.random() * 6,
       dur: 5 + Math.random() * 4,
       size: 1 + Math.random() * 1.5
     }];
   }
 
   onMount(() => {
-    // Initial hearts — clean and simple
-    for (let i = 0; i < 15; i++) addHeart();
+    // Start floating hearts
+    for (let i = 0; i < 22; i++) addHeart();
+    
+    // Keep adding hearts gently forever
+    const interval = setInterval(() => {
+      if (hearts.length < 40) addHeart();
+    }, 1200);
+
+    return () => clearInterval(interval);
   });
 </script>
